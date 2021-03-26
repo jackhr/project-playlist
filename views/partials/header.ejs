@@ -9,5 +9,14 @@
 </head>
 <body>
   <nav>
-    <a href="/">Home</a>
+    <!-- <img src="Super wicked and relevent image url"> -->
+    <a href="/" <%- title === 'All Playlists' ? 'class="active"' : '' %>>All Playlists</a>
+    <% if (user) { %>
+      <a href="/"	<%- title === 'New Playlist' ? 'class="active"' : '' %>>
+        New Playlist</a>
+      <a href="/" <%- title === 'Browse Songs' ? 'class="active"' : '' %>>Browse Songs</a>
+      <a href="/logout">LOG OUT</a>
+    <% } else { %>
+      <a href="/auth/google" class="login">LOG IN&nbsp;<img style="height: 20px;" src="https://i.imgur.com/FHjYyi0.png"></a>
+    <% } %>
   </nav>

@@ -11,5 +11,10 @@
     <input type="text" name="term" class="form-control" placeholder="Enter a GitHub Username">
     <button type="submit">Go!</button>
   </form>
+
+  <% if (searchData) { %>
+    <%= JSON.stringify(searchData) %>
+  <% } %>
+  
 </body>
 </html>

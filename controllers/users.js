@@ -1,19 +1,19 @@
 const User = require('../models/user');
+const Playlist = require('../models/playlist');
 const token = process.env.SHAZAM_KEY;
 const rootURL = "https://genius.p.rapidapi.com/";
 const fetch = require('node-fetch');
 
-
-// fetch("https://shazam.p.rapidapi.com/search?term=kiss%20the%20rain&locale=en-US&offset=0&limit=5", {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-key": token,
-// 		"x-rapidapi-host": "shazam.p.rapidapi.com"
-// 	}
-// });
-
 module.exports = {
   index,
+  show,
+}
+
+function show(req, res) {
+  Playlist.find({user: req.params.id}, function(err, playlists) {
+    if (err) console.log(err);
+    res.render('users/show', { playlists, title: 'MY PLAYLISTS' })
+  })
 }
 
 function index(req, res, next) {

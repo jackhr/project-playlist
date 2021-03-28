@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+  <h1><%= user.name %></h1>
+  <img src="<%= user.avatar %>" alt="">
+  <% if (playlists.length) { %>
+    <% playlists.forEach(function(p) { %>
+      <%= p.title %>
+      <table>
+        <thead>
+          <tr>
+            <th>Track</th>
+            <th>Artist</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% p.songs.forEach(function(s) { %>
+            <tr>
+              <td>s.title</td>
+              <td>s.artist</td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% }); %>
+    <a href=""><button>Add songs</button></a>
+  <% } else { %>
+    <p>You have no playlists in this moments</p>
+  <% } %>
+
+<%- include('../partials/footer') %>

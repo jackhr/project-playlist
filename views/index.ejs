@@ -1,16 +1,3 @@
 <%- include('partials/header') %>
 
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-
-    <form action="/" method="GET">
-      <input type="text" name="q" placeholder="Enter a song">
-      <button type="submit">Go!</button>
-    </form>
-    <div>
-      <% if (searchData) { %>
-        <%= searchData.response.hits[0].result.title %>
-      <% } %>
-    </div>
-
 <%- include('partials/footer') %>

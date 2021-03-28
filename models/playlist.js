@@ -7,7 +7,7 @@ const commentSchema = new Schema({
   user: {type: Schema.Types.ObjectId, ref: 'User'},
 });
 
-const songSchema = new Shema({
+const songSchema = new Schema({
   title: String,
   artist: String,
 });
@@ -19,4 +19,4 @@ const playlistSchema = new Schema({
   user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
-// module.exports = mongoose.model('Playlist', playlistSchema);
+module.exports = mongoose.model('Playlist', playlistSchema);

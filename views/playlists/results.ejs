@@ -2,15 +2,17 @@
 
 <h3>You searched for: <%= q %></h3>
 
-<form action="/playlists/<%= playlist._id %>/search/results" method="GET">
+<!-- <form action="/playlists/<%= playlist._id %>/search/results" method="GET">
   <input type="text" name="p" placeholder="Enter a song">
   <button type="submit">Go!</button>
-</form>
+</form> -->
+
 <table>
   <thead>
     <tr>
       <th>Song</th>
       <th>Artist</th>
+      <th></th>
     </tr>
   </thead>
   <% tracks.forEach(function(t) { %>
@@ -18,10 +20,15 @@
       <tr>
         <td><%= t.result.title %></td>
         <td><%= t.result.primary_artist.name %></td>
+        <form action="/playlists/<%= playlist._id %>/songs" method="POST">
+          <td><button type="submit">Add</button></td>
+          <input style="display: none" type="text" name="title" value="<%= t.result.title %>">
+          <input style="display: none;" type="text" name="artist" value="<%= t.result.primary_artist.name %>">
+        </form>
       </tr>
     </tbody>
-    <% }) %>
-  </table>
+  <% }) %>
+</table>
 
 <%- include('../partials/footer') %>
 

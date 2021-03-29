@@ -1,6 +1,7 @@
 <%- include('../partials/header') %>
   <h1><%= user.name %></h1>
   <img src="<%= user.avatar %>" alt="">
+  <br><br>
   <% if (playlists.length) { %>
     <% playlists.forEach(function(p) { %>
       <%= p.title %>
@@ -20,10 +21,13 @@
           <% }); %>
         </tbody>
       </table>
+      <a href="/playlists/<%= p._id %>/search"><button>Add songs</button></a>
+      <a href="/playlists/<%= p._id %>">Details</a>
+      <br><br>
     <% }); %>
-    <a href=""><button>Add songs</button></a>
   <% } else { %>
     <p>You have no playlists in this moments</p>
   <% } %>
+  <a href="/playlists/new">Make a new Playlist</a>
 
 <%- include('../partials/footer') %>

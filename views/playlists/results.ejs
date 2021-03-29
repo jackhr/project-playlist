@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+
+<h3>You searched for: <%= q %></h3>
+
+<form action="/playlists/<%= playlist._id %>/search/results" method="GET">
+  <input type="text" name="p" placeholder="Enter a song">
+  <button type="submit">Go!</button>
+</form>
+<table>
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>Artist</th>
+    </tr>
+  </thead>
+  <% tracks.forEach(function(t) { %>
+    <tbody>
+      <tr>
+        <td><%= t.result.title %></td>
+        <td><%= t.result.primary_artist.name %></td>
+      </tr>
+    </tbody>
+    <% }) %>
+  </table>
+
+<%- include('../partials/footer') %>
+

@@ -1,0 +1,9 @@
+<%- include('../partials/header') %>
+
+<form action="/playlists/<%= playlist._id %>/search/results" method="GET">
+  <input type="text" name="q" placeholder="Enter a song">
+  <button type="submit">Go!</button>
+</form>
+
+<%- include('../partials/footer') %>
+

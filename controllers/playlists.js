@@ -6,18 +6,41 @@ const fetch = require('node-fetch');
 
 module.exports = {
   index,
-  new: newSong,
-  create: addSong,
+  new: newPlaylist,
+  create,
+  search,
+  show,
+  newSong,
 };
 
-function addSong() {
-
+function newSong(req, res) {
+  Playlist.findById(req.params.id, function(err, playlist) {
+    res.render('playlists/add-song', { playlist, title: playlist.title });
+  });
 }
 
-function newSong(req, res, next) {
-  console.log('here')
+function show(req, res) {
+   Playlist.findById(req.params.id, function(err, playlist) {
+     res.render('playlists/show', { playlist, title: `song Search for ${playlist.title} playlist` })
+   })
+}
+
+function create(req, res) {
+  const playlist = new Playlist(req.body);
+  console
+  playlist.user = req.user._id;
+  playlist.save(function(err) {
+    if (err) console.log(err);
+    res.redirect(`/playlists/${playlist._id}`);
+  });
+}
+
+function newPlaylist(req, res) {
+  res.render('playlists/new', { title: 'New Playlist' });
+}
+
+function search(req, res) {
   const q = req.query.q;
-  console.log(req.query.q);
   const options = {
     "method": "GET",
     "headers": {
@@ -28,7 +51,10 @@ function newSong(req, res, next) {
   fetch(`${rootURL}search?q=${q}`, options)
   .then(res => res.json())
   .then(searchData => {
-    res.render('playlists/new', { searchData, title: 'Project PLAYLIST' });
+    const tracks = searchData.response.hits
+    Playlist.findById(req.params.id, function(err, playlist) {
+      res.render('playlists/results', { q, playlist, tracks, title: `Song Search for ${playlist.title} playlist` });
+    })
   })
   .catch(err => {
     console.log(err)

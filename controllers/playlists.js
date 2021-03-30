@@ -71,7 +71,8 @@ function index(req, res) {
 
 function deleteOne(req, res) {
   Playlist.findByIdAndDelete(req.params.id, function(err, playlist) {
+    console.log(playlist)
     if (err) console.log(err);
-    res.redirect(`/user/${playlist.user}`);
+    res.redirect(`/users/${playlist.user}`);
   })
 }

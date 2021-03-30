@@ -28,21 +28,35 @@
       </tr>
     </tbody>
   </table>
+  <% if (user && playlist.user._id.equals(user._id)) { %>
+    <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+      <button type="submit">X</button>
+    </form>
+    <a href="/playlists/<%= playlist._id %>/search"><button>Add songs</button></a>
+  <% } %>
   <br><br>
-  <h2>Add a comment...</h2>
-  <form action="/playlists/<%= playlist._id %>/comments" method="POST">
-    <input name="content">
-    <button type="submit">ADD COMMENT</button>
-  </form>
-
+  <% if (user) { %>
+    <h2>Add a comment...</h2>
+    <form action="/playlists/<%= playlist._id %>/comments" method="POST">
+      <input name="content">
+      <button type="submit">ADD COMMENT</button>
+    </form>
+  <% } %>
   <% if (playlist.comments.length) { %>
     <% playlist.comments.forEach(c => { %>
       <h2><%= c.userName %> </h2>
       <img src="<%= c.userAvatar %>">
       <p><%= c.content %></p>
-      <form action="/comments/<%= c._id %>?_method=DELETE" method="POST">
-        <button type="submit">X</button>
-      </form>
+      <% if (user && c.userId.equals(user._id)) { %>
+        <form action="/comments/<%= c._id %>?_method=PUT" method="POST">
+          <!-- Value attribute is being set to the comment's current text -->
+          <input name="content" placeholder="<%= c.content %>">
+          <button type="submit">UPDATE COMMENT</button>
+        </form>
+        <form action="/comments/<%= c._id %>?_method=DELETE" method="POST">
+          <button type="submit">X</button>
+        </form>
+      <% } %>
     <% }); %> 
   <% } %>
 

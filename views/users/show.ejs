@@ -22,12 +22,6 @@
             <% }; %>
           </tbody>
         </table>
-        <% if (user && p.user._id.equals(user._id)) { %>
-          <form action="/playlists/<%= p._id %>?_method=DELETE" method="POST">
-            <button type="submit">X</button>
-          </form>
-          <a href="/playlists/<%= p._id %>/search"><button>Add songs</button></a>
-        <% } %>
         <a href="/playlists/<%= p._id %>">Details</a>
         <br><br>
     <% }); %>

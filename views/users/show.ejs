@@ -10,20 +10,26 @@
           <tr>
             <th>Track</th>
             <th>Artist</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <% p.songs.forEach(function(s) { %>
+          <% for (let i = 0; i < 5; i++) { %>
+            <% if (!p.songs[i]) break; %>
             <tr>
-              <td>s.title</td>
-              <td>s.artist</td>
+              <td><%= p.songs[i].title %> </td>
+              <td><%= p.songs[i].artist %> </td>
+              <td></td>
             </tr>
-          <% }); %>
-        </tbody>
-      </table>
-      <a href="/playlists/<%= p._id %>/search"><button>Add songs</button></a>
-      <a href="/playlists/<%= p._id %>">Details</a>
-      <br><br>
+            <% }; %>
+          </tbody>
+        </table>
+        <a href="/playlists/<%= p._id %>/search"><button>Add songs</button></a>
+        <a href="/playlists/<%= p._id %>">Details</a>
+          <form action="/playlists/<%= p._id %>?_method=DELETE" method="POST">
+            <button type="submit">X</button>
+          </form>
+        <br><br>
     <% }); %>
   <% } else { %>
     <p>You have no playlists in this moments</p>

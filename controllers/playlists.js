@@ -11,6 +11,7 @@ module.exports = {
   search,
   show,
   newSong,
+  delete: deleteOne,
 };
 
 function newSong(req, res) {
@@ -68,3 +69,9 @@ function index(req, res) {
   });
 }
 
+function deleteOne(req, res) {
+  Playlist.findByIdAndDelete(req.params.id, function(err, playlist) {
+    if (err) console.log(err);
+    res.redirect(`/user/${playlist.user}`);
+  })
+}

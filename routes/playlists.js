@@ -16,4 +16,6 @@ router.get('/:id/search/results', playlistsCtrl.search);
 
 router.post('/', playlistsCtrl.create);
 
+router.delete('/:id', playlistsCtrl.delete);
+
 module.exports = router;

@@ -7,7 +7,7 @@ module.exports = {
 function create(req, res) {
   Playlist.findById(req.params.id, function(err, playlist) {
     playlist.songs.push(req.body);
-    laylist.save(function(err) {
+    playlist.save(function(err) {
       res.redirect(`/users/${playlist.user}`);
     });
   });

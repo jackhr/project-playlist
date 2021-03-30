@@ -10,7 +10,7 @@ function deleteOne(req, res) {
     {'songs._id': req.params.id}, function(err, playlist) {
       playlist.songs.remove(req.params.id);
       playlist.save(function(err) {
-        res.redirect(`/users/${playlist.user}`);
+        res.redirect(`/playlists/${playlist._id}`);
       });
     }
   )

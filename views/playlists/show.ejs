@@ -1,24 +1,29 @@
 <%- include('../partials/header') %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Song</th>
-      <th>Artist</th>
-    </tr>
-  </thead>
-  <tbody>
+  <table>
+    <thead>
+      <tr>
+        <th>Song</th>
+        <th>Artist</th>
+      </tr>
+    </thead>
+    <tbody>
       <% playlist.songs.forEach(function(s) { %>
       <tr>
         <td><%= s.title %></td>
         <td><%= s.artist %></td>
         <td>
-          <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+          <form action="/songs/<%= s._id %>?_method=DELETE" method="POST">
             <button type="submit">X</button>
           </form>
         </td>
       </tr>
-      <% }) %>  
+      <% }) %>
+      <tr>
+        <td><%= playlist.songs.length %> songs total</td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 

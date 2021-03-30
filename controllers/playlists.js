@@ -3,7 +3,6 @@ const token = process.env.SHAZAM_KEY;
 const rootURL = "https://genius.p.rapidapi.com/";
 const fetch = require('node-fetch');
 
-
 module.exports = {
   index,
   new: newPlaylist,
@@ -22,7 +21,7 @@ function newSong(req, res) {
 
 function show(req, res) {
    Playlist.findById(req.params.id, function(err, playlist) {
-     res.render('playlists/show', { playlist, title: `song Search for ${playlist.title} playlist` })
+     res.render('playlists/show', { playlist, title: `${playlist.title} playlist` })
    })
 }
 

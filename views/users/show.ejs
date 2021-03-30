@@ -19,7 +19,11 @@
             <tr>
               <td><%= p.songs[i].title %> </td>
               <td><%= p.songs[i].artist %> </td>
-              <td></td>
+              <td>
+                <form action="/songs/<%= p.songs[i]._id %>?_method=DELETE" method="POST">
+                  <button type="submit">X</button>
+                </form>
+              </td>
             </tr>
             <% }; %>
           </tbody>

@@ -28,8 +28,8 @@ function show(req, res) {
 
 function create(req, res) {
   const playlist = new Playlist(req.body);
-  console
   playlist.user = req.user._id;
+  console.log("new playlist: ", playlist, '\n', 'req.user: ', req.user)
   playlist.save(function(err) {
     if (err) console.log(err);
     res.redirect(`/playlists/${playlist._id}`);
@@ -63,8 +63,9 @@ function search(req, res) {
 }
 
 function index(req, res) {
-  Playlist.find({}, function(err, playlists) {
+  Playlist.find({}).populate('user').exec(function(err, playlists) {
     if (err) console.log(err);
+    console.log(playlists);
     res.render('playlists/index', { playlists, title: 'ALL PLAYLISTS' });
   });
 }

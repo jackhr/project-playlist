@@ -1,8 +1,7 @@
 <%- include('../partials/header') %>
   
   <% playlists.forEach(function(p) { %>
-    <%= p.title %>
-    <%= p.user %>
+    <h2><%= p.user.name %>'s playlist: <%= p.title %></h2>
     <table>
       <thead>
         <tr>

@@ -40,6 +40,9 @@
       <h2><%= c.userName %> </h2>
       <img src="<%= c.userAvatar %>">
       <p><%= c.content %></p>
+      <form action="/comments/<%= c._id %>?_method=DELETE" method="POST">
+        <button type="submit">X</button>
+      </form>
     <% }); %> 
   <% } %>
 

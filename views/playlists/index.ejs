@@ -10,14 +10,16 @@
         </tr>
       </thead>
       <tbody>
-        <% p.songs.forEach(function(s) { %>
+        <% for (let i = 0; i < 5; i++) { %>
+          <% if (!p.songs[i]) break; %>
           <tr>
-            <td><%= s.title %></td>
-            <td><%= s.artist %></td>
+            <td><%= p.songs[i].title %> </td>
+            <td><%= p.songs[i].artist %> </td>
           </tr>
-        <% }); %>
+          <% }; %>
       </tbody>
     </table>
+    <a href="playlists/<%= p._id %>">Details</a>
   <% }); %>
 
 <%- include('../partials/footer') %>

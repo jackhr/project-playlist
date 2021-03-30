@@ -12,11 +12,13 @@
       <tr>
         <td><%= s.title %></td>
         <td><%= s.artist %></td>
-        <td>
-          <form action="/songs/<%= s._id %>?_method=DELETE" method="POST">
-            <button type="submit">X</button>
-          </form>
-        </td>
+        <% if (user && playlist.user._id.equals(user._id)) { %>
+          <td>
+            <form action="/songs/<%= s._id %>?_method=DELETE" method="POST">
+              <button type="submit">X</button>
+            </form>
+          </td>
+        <% } %>
       </tr>
       <% }) %>
       <tr>

@@ -3,13 +3,20 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
   content: String,
-  rating: Number,
-  user: {type: Schema.Types.ObjectId, ref: 'User'},
+  userId: {type: Schema.Types.ObjectId, ref: 'User'},
+  userName: String,
+  userAvatar: String,
+},
+{
+  timestamps: true,
 });
 
 const songSchema = new Schema({
   title: String,
   artist: String,
+},
+{
+  timestamps: true,
 });
 
 const playlistSchema = new Schema({
@@ -17,6 +24,9 @@ const playlistSchema = new Schema({
   songs: [songSchema],
   comments: [commentSchema],
   user: {type: Schema.Types.ObjectId, ref: 'User'}
+},
+{
+  timestamps: true,
 });
 
 module.exports = mongoose.model('Playlist', playlistSchema);

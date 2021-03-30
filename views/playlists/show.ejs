@@ -28,5 +28,19 @@
       </tr>
     </tbody>
   </table>
+  <br><br>
+  <h2>Add a comment...</h2>
+  <form action="/playlists/<%= playlist._id %>/comments" method="POST">
+    <input name="content">
+    <button type="submit">ADD COMMENT</button>
+  </form>
+
+  <% if (playlist.comments.length) { %>
+    <% playlist.comments.forEach(c => { %>
+      <h2><%= c.userName %> </h2>
+      <img src="<%= c.userAvatar %>">
+      <p><%= c.content %></p>
+    <% }); %> 
+  <% } %>
 
 <%- include('../partials/footer') %>

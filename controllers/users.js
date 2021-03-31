@@ -10,7 +10,9 @@ module.exports = {
 }
 
 function show(req, res) {
-  Playlist.find({user: req.params.id}).populate('user').exec(function(err, playlists) {
+  Playlist.find({user: req.params.id})
+  .sort('title')
+  .populate('user').exec(function(err, playlists) {
     if (err) console.log(err);
     console.log(playlists, playlists[0]);
     res.render('users/show', { playlists, title: 'MY PLAYLISTS' })

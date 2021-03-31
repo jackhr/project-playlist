@@ -68,7 +68,9 @@ function search(req, res) {
 }
 
 function index(req, res) {
-  Playlist.find({}).populate('user').exec(function(err, playlists) {
+  Playlist.find({})
+  .sort('title')
+  .populate('user').exec(function(err, playlists) {
     if (err) console.log(err);
     console.log(playlists);
     res.render('playlists/index', { playlists, title: 'ALL PLAYLISTS' });

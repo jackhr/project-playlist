@@ -6,7 +6,9 @@
       <thead>
         <tr>
           <th>Track</th>
-          <th>Artist</th> 
+          <th>Artist</th>
+          <th>Album</th>
+          <th>Duration</th>
         </tr>
       </thead>
       <tbody>
@@ -15,8 +17,19 @@
           <tr>
             <td><%= p.songs[i].title %> </td>
             <td><%= p.songs[i].artist %> </td>
+            <td><%= p.songs[i].album %> </td>
+            <td><%= p.songs[i].time %> </td>
           </tr>
           <% }; %>
+          <% if (p.songs.length === 1) { %>  
+            <tr>
+              <td><%= p.songs.length %> song total</td>
+            </tr>
+          <% } else { %>
+          <tr>
+            <td><%= p.songs.length %> songs total</td>
+          </tr>
+          <% } %> 
       </tbody>
     </table>
     <a href="playlists/<%= p._id %>">Details</a>

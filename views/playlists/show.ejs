@@ -1,5 +1,10 @@
 <%- include('../partials/header') %>
 
+  <img src="<%= playlist.user.avatar %>">
+  <% if (!user || !playlist.user._id.equals(user._id)) { %>
+    <a href="/users/<%= playlist.user._id %>">Go to <%= playlist.user.name %>'s page </a>
+  <% } %>
+  <h1><%= playlist.title %> </h1>
   <table>
     <thead>
       <tr>
@@ -36,7 +41,7 @@
     <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
       <button type="submit">X</button>
     </form>
-    <a href="/playlists/<%= playlist._id %>/search"><button>Add songs</button></a>
+    <a href="/playlists/<%= playlist._id %>/search"><button>Forget Something?</button></a>
   <% } %>
   <br><br>
   <% if (user) { %>
@@ -62,6 +67,8 @@
         </form>
       <% } %>
     <% }); %> 
-  <% } %>
+  <% } else { %>
+    <p>There are no comments yet!</p>
+  <% } %> 
 
 <%- include('../partials/footer') %>

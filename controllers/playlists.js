@@ -20,7 +20,7 @@ function newSong(req, res) {
 }
 
 function show(req, res) {
-   Playlist.findById(req.params.id, function(err, playlist) {
+   Playlist.findById(req.params.id).populate('user').exec(function(err, playlist) {
      res.render('playlists/show', { playlist, title: `${playlist.title} playlist` })
    })
 }

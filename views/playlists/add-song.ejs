@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-
+<h1>"<%= title %>" bout to get some love!</h1>
 <form action="/playlists/<%= playlist._id %>/search/results" method="GET">
   <input type="text" name="q" placeholder="Enter a song">
   <button type="submit">Go!</button>

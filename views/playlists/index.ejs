@@ -20,6 +20,7 @@
       </tbody>
     </table>
     <a href="playlists/<%= p._id %>">Details</a>
+    <a href="/users/<%= p.user._id %>">Go to <%= p.user.name %>'s page </a>
   <% }); %>
 
 <%- include('../partials/footer') %>

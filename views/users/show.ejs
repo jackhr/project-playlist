@@ -1,7 +1,13 @@
 <%- include('../partials/header') %>
-  <h1><%= user.name %></h1>
-  <img src="<%= user.avatar %>" alt="">
-  <br><br>
+  <% if (playlists.length) { %>
+    <h1><%= playlists[0].user.name %></h1>
+    <img src="<%= playlists[0].user.avatar %>" alt="">
+    <br><br>
+  <% } else { %>
+    <h1><%= user.name %></h1>
+    <img src="<%= user.avatar %>" alt="">
+    <br><br>
+  <% } %> 
   <% if (playlists.length) { %>
     <% playlists.forEach(function(p) { %>
       <%= p.title %>

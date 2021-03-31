@@ -1,21 +1,20 @@
 var express = require('express');
 var router = express.Router();
-const passport = require('passport');
-const fetch = require('node-fetch');
-const playlistsCtrl = require('../controllers/playlists')
+const playlistsCtrl = require('../controllers/playlists');
+const isLoggedIn = require('../config/auth');
 
-router.get('/new', playlistsCtrl.new);
+router.get('/new', isLoggedIn, playlistsCtrl.new);
 
 router.get('/:id', playlistsCtrl.show);
 
 router.get('/', playlistsCtrl.index);
 
-router.get('/:id/search', playlistsCtrl.newSong);
+router.get('/:id/search', isLoggedIn, playlistsCtrl.newSong);
 
-router.get('/:id/search/results', playlistsCtrl.search);
+router.get('/:id/search/results', isLoggedIn, playlistsCtrl.search);
 
-router.post('/', playlistsCtrl.create);
+router.post('/', isLoggedIn, playlistsCtrl.create);
 
-router.delete('/:id', playlistsCtrl.delete);
+router.delete('/:id', isLoggedIn, playlistsCtrl.delete);
 
 module.exports = router;

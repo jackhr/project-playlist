@@ -27,7 +27,8 @@ const playlistSchema = new Schema({
   title: String,
   songs: [songSchema],
   comments: [commentSchema],
-  user: {type: Schema.Types.ObjectId, ref: 'User'}
+  user: {type: Schema.Types.ObjectId, ref: 'User'},
+  about: String
 },
 {
   timestamps: true,

@@ -34,6 +34,11 @@
   <% } else { %>
     <p>You have no playlists in this moments</p>
   <% } %>
-  <a href="/playlists/new">Make a new Playlist</a>
+  <% if (!user) { %>
+  <% } else if (playlists.length < 1) { %>
+    <a href="/playlists/new">Make a new Playlist</a>
+  <% } else if(playlists[0].user._id.equals(user._id)) { %>
+    <a href="/playlists/new">Make a new Playlist</a>
+  <% } %> 
 
 <%- include('../partials/footer') %>

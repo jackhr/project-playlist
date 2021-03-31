@@ -12,8 +12,12 @@ const commentSchema = new Schema({
 });
 
 const songSchema = new Schema({
+  apiSongId: Number,
   title: String,
   artist: String,
+  album: String,
+  time: String,
+  artistAvatar: String,
 },
 {
   timestamps: true,

@@ -42,19 +42,25 @@ function newPlaylist(req, res) {
 function search(req, res) {
   const q = req.query.q;
   const options = {
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-key": token,
-      "x-rapidapi-host": "genius.p.rapidapi.com"
-    }
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": token,
+		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
+	}
   }
   fetch(`${rootURL}search?q=${q}`, options)
   .then(res => res.json())
   .then(searchData => {
-    const tracks = searchData.response.hits
+    const tracks = searchData.data.map(track => {
+      let minutes = Math.floor(track.duration/60).toString();
+      let seconds = (track.duration % 60).toString();
+      if (seconds.length === 1) seconds = "0" + seconds;
+      track.duration = minutes + ":" + seconds;
+      return track;
+    });
     Playlist.findById(req.params.id, function(err, playlist) {
       res.render('playlists/results', { q, playlist, tracks, title: `Song Search for ${playlist.title} playlist` });
-    })
+    });
   })
   .catch(err => {
     console.log(err)

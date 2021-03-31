@@ -5,6 +5,8 @@
       <tr>
         <th>Song</th>
         <th>Artist</th>
+        <th>Album</th>
+        <th>Duration</th>
       </tr>
     </thead>
     <tbody>
@@ -12,6 +14,8 @@
       <tr>
         <td><%= s.title %></td>
         <td><%= s.artist %></td>
+        <td><%= s.album %></td>
+        <td><%= s.time %></td>
         <% if (user && playlist.user._id.equals(user._id)) { %>
           <td>
             <form action="/songs/<%= s._id %>?_method=DELETE" method="POST">

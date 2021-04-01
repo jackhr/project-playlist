@@ -3,9 +3,12 @@
 <h1> <%= title %> </h1>
 
 <form action="/playlists" method="POST">
-  <label for="">Title:
-    <input type="text" name="title" placeholder="My Dope Playlist">
-  </label>
+  <label>Title:</label>
+  <input type="text" name="title" placeholder="My Dope Playlist">
+  <label>Image:</label>
+  <input type="text" name="img" placeholder="Enter a valid image url">
+  <label>Description:</label>
+  <input type="text" name="about" placeholder="Give your playlist a catchy description!">
   <button type="submit">Go!</button>
 </form>
 

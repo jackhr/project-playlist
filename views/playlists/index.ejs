@@ -2,36 +2,36 @@
   
   <% playlists.forEach(function(p) { %>
     <h2><%= p.title %> by <%= p.user.name %></h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Track</th>
-          <th>Artist</th>
-          <th>Album</th>
-          <th>Duration</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (let i = 0; i < 5; i++) { %>
-          <% if (!p.songs[i]) break; %>
+    <% if (p.songs.length === 1) { %>
+        <p><%= p.songs.length %> song, <%= playLength %></p>
+    <% } else { %>
+      <p><%= p.songs.length %> songs, <%= playLength %></p>
+    <% } %> 
+    <div>
+      <table>
+        <div style="text-align: end; width: 100%;">
+        </div>
+        <thead>
           <tr>
-            <td><%= p.songs[i].title %> </td>
-            <td><%= p.songs[i].artist %> </td>
-            <td><%= p.songs[i].album %> </td>
-            <td><%= p.songs[i].time %> </td>
+            <th>Track</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Duration</th>
           </tr>
-          <% }; %>
-          <% if (p.songs.length === 1) { %>  
+        </thead>
+        <tbody>
+          <% for (let i = 0; i < 5; i++) { %>
+            <% if (!p.songs[i]) break; %>
             <tr>
-              <td><%= p.songs.length %> song total</td>
+              <td><%= p.songs[i].title %> </td>
+              <td><%= p.songs[i].artist %> </td>
+              <td><%= p.songs[i].album %> </td>
+              <td><%= p.songs[i].time %> </td>
             </tr>
-          <% } else { %>
-          <tr>
-            <td><%= p.songs.length %> songs total</td>
-          </tr>
-          <% } %> 
-      </tbody>
-    </table>
+            <% }; %>
+        </tbody>
+      </table>
+    </div>
     <a href="playlists/<%= p._id %>">Details</a>
     <a href="/users/<%= p.user._id %>">Go to <%= p.user.name %>'s page </a>
   <% }); %>

@@ -19,14 +19,15 @@
         <td><%= t.title_short %></td>
         <td><%= t.artist.name %></td>
         <td><%= t.album.title %></td>
-        <td><%= t.duration %></td>
+        <td><%= t.time %></td>
         <form action="/playlists/<%= playlist._id %>/songs" method="POST">
           <td><button type="submit">Add</button></td>
           <input style="display: none" type="text" name="apiSongId" value="<%= t.id %>">
           <input style="display: none" type="text" name="title" value="<%= t.title_short %>">
           <input style="display: none;" type="text" name="artist" value="<%= t.artist.name %>">
           <input style="display: none;" type="text" name="album" value="<%= t.album.title %>">
-          <input style="display: none;" type="text" name="time" value="<%= t.duration %>">
+          <input style="display: none;" type="text" name="time" value="<%= t.time %>">
+          <input style="display: none;" type="text" name="duration" value="<%= t.duration %>">
           <input style="display: none;" type="text" name="artistAvatar" value="<%= t.artist.picture_big %>">
         </form>
       </tr>

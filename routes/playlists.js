@@ -15,6 +15,11 @@ router.get('/:id/search/results', isLoggedIn, playlistsCtrl.search);
 
 router.post('/', isLoggedIn, playlistsCtrl.create);
 
+router.put('/:id/image', isLoggedIn, playlistsCtrl.editImage);
+
+router.put('/:id/description', isLoggedIn, playlistsCtrl.editDescription);
+
 router.delete('/:id', isLoggedIn, playlistsCtrl.delete);
+
 
 module.exports = router;

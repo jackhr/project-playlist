@@ -1,6 +1,10 @@
 <%- include('../partials/header') %>
 
-  <img src="<%= playlist.user.avatar %>">
+  <% if (!playlist.image) { %>
+    <img style="width: 100px;" src="/images/project-playlist.svg">
+  <% } else { %>
+  <img style="width: 200px;" src="<%= playlist.img %>">
+  <% } %> 
   <% if (!user || !playlist.user._id.equals(user._id)) { %>
     <a href="/users/<%= playlist.user._id %>">Go to <%= playlist.user.name %>'s page </a>
   <% } %>
@@ -36,13 +40,22 @@
         <td></td>
       </tr>
     </tbody>
+    <h2>Description:</h2>
   </table>
   <% if (user && playlist.user._id.equals(user._id)) { %>
     <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
       <button type="submit">X</button>
     </form>
     <a href="/playlists/<%= playlist._id %>/search"><button>Forget Something?</button></a>
-  <% } %>
+    <% } %>
+    <h2>Description:</h2>
+    <p> <%= playlist.about %> </p>
+    <% if (user && playlist.user._id.equals(user._id)) { %>
+      <form action="/playlists/<%= playlist._id %>/description?_method=PUT" method="POST">
+        <input name="about">
+        <button type="submit">EDIT</button>
+      </form>
+    <% } %>
   <br><br>
   <% if (user) { %>
     <h2>Add a comment...</h2>
@@ -50,7 +63,7 @@
       <input name="content">
       <button type="submit">ADD COMMENT</button>
     </form>
-  <% } %>
+    <% } %>
   <% if (playlist.comments.length) { %>
     <% playlist.comments.forEach(c => { %>
       <h2><%= c.userName %> </h2>
@@ -58,7 +71,6 @@
       <p><%= c.content %></p>
       <% if (user && c.userId.equals(user._id)) { %>
         <form action="/comments/<%= c._id %>?_method=PUT" method="POST">
-          <!-- Value attribute is being set to the comment's current text -->
           <input name="content" placeholder="<%= c.content %>">
           <button type="submit">UPDATE COMMENT</button>
         </form>
@@ -70,5 +82,4 @@
   <% } else { %>
     <p>There are no comments yet!</p>
   <% } %> 
-
 <%- include('../partials/footer') %>

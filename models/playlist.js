@@ -17,6 +17,7 @@ const songSchema = new Schema({
   artist: String,
   album: String,
   time: String,
+  duration: Number,
   artistAvatar: String,
 },
 {
@@ -25,10 +26,11 @@ const songSchema = new Schema({
 
 const playlistSchema = new Schema({
   title: String,
+  img: String,
+  about: String,
   songs: [songSchema],
   comments: [commentSchema],
   user: {type: Schema.Types.ObjectId, ref: 'User'},
-  about: String
 },
 {
   timestamps: true,

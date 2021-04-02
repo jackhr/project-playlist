@@ -308,3 +308,8 @@ th {
   transition: color 3s ease;
   color: red;
 }
+
+#playlists-title {
+  font-size: 50px;
+  margin: 30px 0;
+}

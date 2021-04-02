@@ -1,8 +1,7 @@
 <%- include('../partials/header') %>
 
 <div class="user-div">
-  <img class="user-avatar" src="<%= playlist.user.avatar %>">
-
+  <a href="/users/<%= playlist.user._id %> "><img class="user-avatar" src="<%= playlist.user.avatar %>"></a>
 </div>
   <br><br>
 <div class="playlist-div content-wrapper">

@@ -1,5 +1,9 @@
 <%- include('../partials/header') %>
 
+  <h1 id="playlists-title"><%= title %> </h1>
+  <% if (!playlists.length) { %>
+    <h2>I'm sure they'll be along shortly...</h2>
+  <% } %>
   <div id="pl-index-content-wrapper">
     <% playlists.forEach(function(p) { %>
       <div class="playlist-index-div">

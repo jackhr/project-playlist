@@ -9,7 +9,8 @@ body {
   margin: 0;
   padding-top: 100px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: rgba(9, 33, 58, 0.386);
+  background-color: rgb(50, 50, 50);
+  color: rgb(213, 213, 213);
 }
 
 nav {
@@ -21,9 +22,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  /* border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px; */
+  padding: 10px 25px 10px 10px;
+
+  font-family: 'Comfortaa', cursive;
+  font-size: 20px;
 }
 
 #nav-middle {
@@ -35,15 +37,82 @@ nav {
   padding: 0 10px;
 }
 
+h1 {
+  margin: 0 10px;
+  line-height: 26px;
+  color: white;
+}
+
 a {
   color: #00B7FF;
   text-decoration: none;
 }
 
 table {
-  width: 70vw;
+  width: 100%;
 }
 
 th {
   text-align: left;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  width: 75px;
+}
+
+.user-div, .playlist-header-div {
+  display: flex;
+  align-items: center;
+}
+
+.playlist-header-div {
+  align-items: flex-end;
+  margin: 20px 0;
+}
+
+.playlist-div {
+  padding: 20px;
+  border: rgba(0, 0, 0, 0.625) solid 2px;
+  border-radius: 20px;
+  background-color: rgb(13, 54, 97);
+}
+
+.user-name {
+  padding-left: 10px;
+}
+
+.content-wrapper {
+  width: 70vw;
+}
+
+.new-playlist {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+hr {
+  border: 1px solid black;
+}
+
+.table-line {
+  width: 100%;
+  height: 2px;
+  background: black;
+}
+
+#title-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.title {
+  margin: 40px 0;
+  font-size: 100px;
+  font-family: 'Comfortaa', cursive;
+
 }

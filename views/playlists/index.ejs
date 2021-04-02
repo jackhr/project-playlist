@@ -3,9 +3,9 @@
   <% playlists.forEach(function(p) { %>
     <h2><%= p.title %> by <%= p.user.name %></h2>
     <% if (p.songs.length === 1) { %>
-        <p><%= p.songs.length %> song, <%= playLength %></p>
+        <p><%= p.songs.length %> song, <%= p.duration %></p>
     <% } else { %>
-      <p><%= p.songs.length %> songs, <%= playLength %></p>
+      <p><%= p.songs.length %> songs, <%= p.duration %></p>
     <% } %> 
     <div>
       <table>

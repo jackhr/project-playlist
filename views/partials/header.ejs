@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <title>Project Playlist</title>
 </head>
@@ -12,7 +14,7 @@
     <a href="/"><img style="width: 50px;" src="/images/project-playlist.svg"></a>
     <div id="nav-middle">
       <a class="nav-middle-links" href="/">HOME</a>
-      <a class="nav-middle-links" href="/playlists">All PLAYLISTS</a>
+      <a class="nav-middle-links" href="/playlists">ALL PLAYLISTS</a>
       <% if (user) { %>
         <a class="nav-middle-links" href="/users/<%= user._id %>">MY PLAYLISTS</a>
       <% } %> 

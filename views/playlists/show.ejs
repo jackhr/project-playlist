@@ -9,6 +9,11 @@
     <a href="/users/<%= playlist.user._id %>">Go to <%= playlist.user.name %>'s page </a>
   <% } %>
   <h1><%= playlist.title %> </h1>
+  <% if (playlist.songs.length === 1) { %>
+    <p><%= playlist.songs.length %> song, <%= playlist.duration %></p>
+  <% } else { %>
+    <p><%= playlist.songs.length %> songs, <%= playlist.duration %></p>
+  <% } %> 
   <table>
     <thead>
       <tr>
@@ -34,13 +39,7 @@
         <% } %>
       </tr>
       <% }) %>
-      <tr>
-        <td><%= playlist.songs.length %> songs total</td>
-        <td></td>
-        <td></td>
-      </tr>
     </tbody>
-    <h2>Description:</h2>
   </table>
   <% if (user && playlist.user._id.equals(user._id)) { %>
     <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">

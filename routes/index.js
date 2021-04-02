@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {title: 'Project PLAYLIST'})
+  res.render('index')
 });
 
 // Google OAuth login route

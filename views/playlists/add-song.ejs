@@ -1,9 +1,12 @@
 <%- include('../partials/header') %>
-<h1>Enter a song, an album, or an artist!</h1>
-<form action="/playlists/<%= playlist._id %>/search/results" method="GET">
-  <input style="width: 500px;" type="text" name="q" placeholder="&quot;<%= title %>&quot; bout to get some love!">
-  <button type="submit">Go!</button>
-</form>
+
+<div class="title-div">
+  <h1>Enter a Song, an Album, or an Artist!</h1>
+  <form action="/playlists/<%= playlist._id %>/search/results" method="GET">
+    <input style="width: 500px;" type="text" name="q" placeholder="&quot;<%= title %>&quot; bout to get some love!">
+    <button id="search-button" type="submit">GO</button>
+  </form>
+</div>
 
 <%- include('../partials/footer') %>
 

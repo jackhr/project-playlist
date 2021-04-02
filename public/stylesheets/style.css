@@ -188,12 +188,28 @@ th {
   background: rgb(108, 133, 165);
 }
 
-#title-div {
+.title-div {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 80vh;
+}
+
+.title-div > form {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#search-button {
+  background: transparent;
+  border: none;
+  font-size: 25px;
+  color: aliceblue;
+  padding: 0;
+  line-height: 0;
+  margin: 5px;
 }
 
 .title {

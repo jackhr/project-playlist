@@ -68,9 +68,9 @@
                 </tr>
                 <% }; %>
                 <% if (p.songs.length === 1) { %>  
-                  <td><%= p.songs.length %> song</td>
+                  <td><span class="time-span"><%= p.songs.length %> song, <%= p.duration %></span></td>
                 <% } else { %>
-                  <td><%= p.songs.length %> songs</td>
+                  <td><span class="time-span"><%= p.songs.length %> songs, <%= p.duration %></span></td>
                 <% } %>
                 <td></td>
                 <td></td>
@@ -88,9 +88,9 @@
   <div id="new-playlist-div">
     <% if (user) { %>
       <% if (playlists.length < 1) { %>
-        <a class="new-playlist" href="/playlists/new"><img style="width: 25px;" src="/images/add-playlist-icon.png">&nbsp;&nbsp;Make a new Playlist</a>
+        <a class="new-playlist" href="/playlists/new"><img class="new-playlist-img" src="/images/add-playlist-icon-blue.png">&nbsp;&nbsp;Make a new Playlist</a>
       <% } else if(playlists[0].user._id.equals(user._id)) { %>
-        <a class="new-playlist" href="/playlists/new"><img style="width: 25px;" src="/images/add-playlist-icon.png">&nbsp;&nbsp;Make a new Playlist</a>
+        <a class="new-playlist" href="/playlists/new"><img class="new-playlist-img" src="/images/add-playlist-icon-white.png">&nbsp;&nbsp;New Playlist</a>
       <% } %> 
     <% } %> 
   </div>

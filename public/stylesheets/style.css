@@ -11,6 +11,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: rgb(50, 50, 50);
   color: rgb(213, 213, 213);
+  font-family: 'Encode Sans Expanded', sans-serif;
 }
 
 nav {
@@ -23,9 +24,14 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 10px 25px 10px 10px;
-
   font-family: 'Comfortaa', cursive;
-  font-size: 20px;
+  font-size: 23px;
+  height: 70px
+}
+
+#icon {
+  width: 40px;
+  padding-top: 5px;
 }
 
 #nav-middle {
@@ -34,7 +40,7 @@ nav {
 }
 
 .nav-middle-links {
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
 h1 {
@@ -44,12 +50,13 @@ h1 {
 }
 
 a {
-  color: #00B7FF;
+  color: rgb(158, 211, 255);
   text-decoration: none;
 }
 
 table {
   width: 100%;
+  font-size: 16px;
 }
 
 th {
@@ -87,19 +94,21 @@ th {
 }
 
 .new-playlist {
+  font-size: 20px;
   display: flex;
   align-items: center;
   margin-bottom: 50px;
+  margin-top: 15px;
 }
 
-hr {
-  border: 1px solid black;
+.new-playlist-img {
+  width: 30px;
 }
 
 .table-line {
   width: 100%;
   height: 2px;
-  background: black;
+  background: rgb(108, 133, 165);
 }
 
 #title-div {
@@ -114,5 +123,9 @@ hr {
   margin: 40px 0;
   font-size: 100px;
   font-family: 'Comfortaa', cursive;
+}
 
+.time-span {
+  font-size: 13px;
+  color: rgb(158, 211, 255);
 }

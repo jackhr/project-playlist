@@ -32,6 +32,7 @@
     <table>
       <thead>
         <tr>
+          <th>#</th>
           <th>Track</th>
           <th>Artist</th>
           <th>Album</th>
@@ -43,20 +44,27 @@
           <td><div class="table-line"></div></td>
           <td><div class="table-line"></div></td>
           <td><div class="table-line"></div></td>
+          <td><div class="table-line"></div></td>
           <td><div id="last-line" class="table-line"></div></td>
         </tr>
-        <% for (let i = 0; i < 5; i++) { %>
-          <% if (!playlist.songs[i]) break; %>
-          <form action="/songs/<%= playlist.songs[i]._id %>?_method=DELETE" method="POST">
+        <% playlist.songs.forEach((s, idx) => { %>
+          <form action="/songs/<%= s._id %>?_method=DELETE" method="POST">
             <tr>
-              <td><%= playlist.songs[i].title %> </td>
-              <td><%= playlist.songs[i].artist %> </td>
-              <td><%= playlist.songs[i].album %> </td>
-              <td><%= playlist.songs[i].time %> <button id="delete-song-button" type="submit">DELETE</button> </td>
+              <td><%= idx + 1 %> </td>
+              <td><%= s.title %> </td>
+              <td><%= s.artist %> </td>
+              <td><%= s.album %> </td>
+              <td><%= s.time %>
+              <% if (user && playlist.user._id.equals(user._id)) { %>
+                <button id="delete-song-button" type="submit">DELETE</button> </td>
+              <% } else { %>
+              </td>
+              <% } %> 
             </tr>
           </form>
-        <% }; %>
+        <% }); %>
         <tr>
+          <td><div class="table-line"></div></td>
           <td><div class="table-line"></div></td>
           <td><div class="table-line"></div></td>
           <td><div class="table-line"></div></td>
@@ -68,6 +76,7 @@
           <% } else { %>
             <td><span class="time-span"><%= playlist.songs.length %> songs, <%= playlist.duration %></span></td>
           <% } %>
+          <td></td>
           <td></td>
           <td></td>
           <td><a href="/playlists/<%= playlist._id %>">Details</a></td>

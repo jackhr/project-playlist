@@ -30,15 +30,18 @@
         </div>
         <div class="playlist-header">
           <h2 class="playlist-title"><%= p.title %></h2>
+          <a style="color: unset;" href="/users/<%= p.user._id %>">
           <div id="name-and-avatar">
             <img class="user-avatar" src="<%= p.user.avatar %> ">
             <h2 id="playlist-user"><%= p.user.name %></h2>
           </div>
+          </a>
         </div>
         <div>
           <table>
             <thead>
               <tr>
+                <th>#</th>
                 <th>Track</th>
                 <th>Artist</th>
                 <th>Album</th>
@@ -50,11 +53,13 @@
                 <td><div class="table-line"></div></td>
                 <td><div class="table-line"></div></td>
                 <td><div class="table-line"></div></td>
+                <td><div class="table-line"></div></td>
                 <td><div id="last-line" class="table-line"></div></td>
               </tr>
               <% for (let i = 0; i < 5; i++) { %>
                 <% if (!p.songs[i]) break; %>
                 <tr>
+                  <td><%= i + 1 %></td>
                   <td><%= p.songs[i].title %> </td>
                   <td><%= p.songs[i].artist %> </td>
                   <td><%= p.songs[i].album %> </td>
@@ -62,11 +67,19 @@
                 </tr>
                 <% }; %>
                 <tr>
+                  <td><div class="table-line"></div></td>
+                  <td><div class="table-line"></div></td>
+                  <td><div class="table-line"></div></td>
+                  <td><div class="table-line"></div></td>
+                  <td><div id="last-line" class="table-line"></div></td>
+                </tr>
+                <tr>
                   <% if (p.songs.length === 1) { %>  
                     <td><span class="time-span"><%= p.songs.length %> song, <%= p.duration %></span></td>
                   <% } else { %>
                     <td><span class="time-span"><%= p.songs.length %> songs, <%= p.duration %></span></td>
                   <% } %>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td><a href="/playlists/<%= p._id %>">Details</a></td>

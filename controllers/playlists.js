@@ -50,7 +50,7 @@ function editDescription(req, res) {
 
 function newSong(req, res) {
   Playlist.findById(req.params.id, function(err, playlist) {
-    res.render('playlists/add-song', { playlist, title: playlist.title });
+    res.render('playlists/add-song', { playlist, title: playlist.title, failed: false });
   });
 }
 
@@ -95,6 +95,9 @@ function search(req, res) {
       return track;
     });
     Playlist.findById(req.params.id, function(err, playlist) {
+      if (searchData.total === 0) {
+        res.render(`playlists/add-song`, { failed: true, playlist, title: playlist.title })
+      }
       res.render('playlists/results', { q, playlist, tracks, title: `Song Search for ${playlist.title} playlist` });
     });
   })

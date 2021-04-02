@@ -1,5 +1,8 @@
 <%- include('../partials/header') %>
 
+<% if (failed) { %>
+  <h1>We couldn't find what you searched for! Try again.</h1>
+<% } %>
 <div class="title-div">
   <h1>Enter a Song, an Album, or an Artist!</h1>
   <form action="/playlists/<%= playlist._id %>/search/results" method="GET">

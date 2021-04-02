@@ -1,8 +1,8 @@
 <%- include('../partials/header') %>
 <br>
-<a href="./">Change your search</a>
-<h3>You searched for: <%= q %></h3>
-
+<a href="/playlists/<%= playlist._id %> /search">Change your search</a>
+<h3 id="search-q">You searched for: <%= q %></h3>
+<div id="table-div">
 <table>
   <thead>
     <tr>
@@ -13,15 +13,21 @@
       <th></th>
     </tr>
   </thead>
-  <% tracks.forEach(function(t) { %>
-    <tbody>
+  <tbody>
+    <% tracks.forEach(function(t) { %>
+      <tr>
+        <td><div class="table-line"></div></td>
+        <td><div class="table-line"></div></td>
+        <td><div class="table-line"></div></td>
+        <td><div id="last-line" class="table-line"></div></td>
+      </tr>
       <tr>
         <td><%= t.title_short %></td>
         <td><%= t.artist.name %></td>
         <td><%= t.album.title %></td>
         <td><%= t.time %></td>
         <form action="/playlists/<%= playlist._id %>/songs" method="POST">
-          <td><button type="submit">Add</button></td>
+          <td><button id="add-button" type="submit">Add</button></td>
           <input style="display: none" type="text" name="apiSongId" value="<%= t.id %>">
           <input style="display: none" type="text" name="title" value="<%= t.title_short %>">
           <input style="display: none;" type="text" name="artist" value="<%= t.artist.name %>">
@@ -31,9 +37,10 @@
           <input style="display: none;" type="text" name="artistAvatar" value="<%= t.artist.picture_big %>">
         </form>
       </tr>
-    </tbody>
-  <% }) %>
+    <% }) %>
+  </tbody>
 </table>
+</div>
 
 <%- include('../partials/footer') %>
 

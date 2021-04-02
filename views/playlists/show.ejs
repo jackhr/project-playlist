@@ -17,28 +17,41 @@
   <table>
     <thead>
       <tr>
-        <th>Song</th>
+        <th>Track</th>
         <th>Artist</th>
         <th>Album</th>
         <th>Duration</th>
       </tr>
     </thead>
     <tbody>
-      <% playlist.songs.forEach(function(s) { %>
       <tr>
-        <td><%= s.title %></td>
-        <td><%= s.artist %></td>
-        <td><%= s.album %></td>
-        <td><%= s.time %></td>
-        <% if (user && playlist.user._id.equals(user._id)) { %>
-          <td>
-            <form action="/songs/<%= s._id %>?_method=DELETE" method="POST">
-              <button type="submit">X</button>
-            </form>
-          </td>
-        <% } %>
+        <td><div class="table-line"></div></td>
+        <td><div class="table-line"></div></td>
+        <td><div class="table-line"></div></td>
+        <td><div id="last-line" class="table-line"></div></td>
       </tr>
-      <% }) %>
+      <% for (let i = 0; i < 5; i++) { %>
+        <% if (!playlist.songs[i]) break; %>
+        <tr>
+          <td><%= playlist.songs[i].title %> </td>
+          <td><%= playlist.songs[i].artist %> </td>
+          <td><%= playlist.songs[i].album %> </td>
+          <td><%= playlist.songs[i].time %> </td>
+        </tr>
+        <% }; %>
+        <tr>
+          <% if (playlist.songs.length === 1) { %>  
+            <td><span class="time-span"><%= playlist.songs.length %> song, <%= playlist.duration %></span></td>
+          <% } else { %>
+            <td><span class="time-span"><%= playlist.songs.length %> songs, <%= playlist.duration %></span></td>
+          <% } %>
+          <td></td>
+          <td></td>
+          <td><a href="/playlists/<%= playlist._id %>">Details</a></td>
+        </tr>
+        <tr>
+          <td><a class="time-span" href="/users/<%= playlist.user._id %>">More From User</a></td>
+        </tr>
     </tbody>
   </table>
   <% if (user && playlist.user._id.equals(user._id)) { %>

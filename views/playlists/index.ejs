@@ -1,39 +1,80 @@
 <%- include('../partials/header') %>
-  
-  <% playlists.forEach(function(p) { %>
-    <h2><%= p.title %> by <%= p.user.name %></h2>
-    <% if (p.songs.length === 1) { %>
-        <p><%= p.songs.length %> song, <%= p.duration %></p>
-    <% } else { %>
-      <p><%= p.songs.length %> songs, <%= p.duration %></p>
-    <% } %> 
-    <div>
-      <table>
-        <div style="text-align: end; width: 100%;">
+
+  <div id="pl-index-content-wrapper">
+    <% playlists.forEach(function(p) { %>
+      <div class="playlist-index-div">
+        <div class="artwork-div">
+          <% if (!!p.img) { %>
+            <img style="width: 200px;" src="<%= p.img %>">
+          <% } else { %>
+            <% if (p.songs.length) { %>
+              <% for (let i = 0; i < 4; i++) { %>
+                <% if (!p.songs[i]) break; %>
+                <% if (p.songs.length < 4) { %>
+                  <img style="width: 200px;" src="<%= p.songs[i].artistAvatar %> ">
+                <% break; %> 
+                <% } %>
+                <img style="width: 100px;" src="<%= p.songs[i].artistAvatar %> ">
+                <% if (i === 1) { %>
+                  <br>
+                <% } %>
+              <% } %>
+            <% } else { %>
+              <img style="width: 200px;" src="/images/white-double-quaver.png">
+            <% } %> 
+          <% } %>
         </div>
-        <thead>
-          <tr>
-            <th>Track</th>
-            <th>Artist</th>
-            <th>Album</th>
-            <th>Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (let i = 0; i < 5; i++) { %>
-            <% if (!p.songs[i]) break; %>
-            <tr>
-              <td><%= p.songs[i].title %> </td>
-              <td><%= p.songs[i].artist %> </td>
-              <td><%= p.songs[i].album %> </td>
-              <td><%= p.songs[i].time %> </td>
-            </tr>
-            <% }; %>
-        </tbody>
-      </table>
-    </div>
-    <a href="playlists/<%= p._id %>">Details</a>
-    <a href="/users/<%= p.user._id %>">Go to <%= p.user.name %>'s page </a>
-  <% }); %>
+        <div class="playlist-header">
+          <h2 class="playlist-title"><%= p.title %></h2>
+          <div id="name-and-avatar">
+            <img class="user-avatar" src="<%= p.user.avatar %> ">
+            <h2 id="playlist-user"><%= p.user.name %></h2>
+          </div>
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Track</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="table-line"></div></td>
+                <td><div class="table-line"></div></td>
+                <td><div class="table-line"></div></td>
+                <td><div id="last-line" class="table-line"></div></td>
+              </tr>
+              <% for (let i = 0; i < 5; i++) { %>
+                <% if (!p.songs[i]) break; %>
+                <tr>
+                  <td><%= p.songs[i].title %> </td>
+                  <td><%= p.songs[i].artist %> </td>
+                  <td><%= p.songs[i].album %> </td>
+                  <td><%= p.songs[i].time %> </td>
+                </tr>
+                <% }; %>
+                <tr>
+                  <% if (p.songs.length === 1) { %>  
+                    <td><span class="time-span"><%= p.songs.length %> song, <%= p.duration %></span></td>
+                  <% } else { %>
+                    <td><span class="time-span"><%= p.songs.length %> songs, <%= p.duration %></span></td>
+                  <% } %>
+                  <td></td>
+                  <td></td>
+                  <td><a href="/playlists/<%= p._id %>">Details</a></td>
+                </tr>
+                <tr>
+                  <td><a class="time-span" href="/users/<%= p.user._id %>">More From User</a></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% }); %>
+  </div>
 
 <%- include('../partials/footer') %>

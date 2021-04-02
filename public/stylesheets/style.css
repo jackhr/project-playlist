@@ -66,6 +66,60 @@ th {
 .user-avatar {
   border-radius: 50%;
   width: 75px;
+  height: 75px;
+}
+
+.user-div {
+  margin: 10px 0;
+}
+
+#playlist-title-div {
+  display: flex;
+  flex-direction: column;
+}
+
+#playlist-title-div-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  margin-left: 10px;
+}
+
+#playlist-title-div > h2{
+  margin: 5px 0;
+}
+
+.playlist-title {
+  font-size: 40px;
+}
+
+#playlist-user {
+  font-size: 18px;
+}
+
+.playlist-header {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.artwork-div {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+#name-and-avatar {
+  display: flex;
+}
+
+#name-and-avatar > img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.playlist-header > h2 {
+  font-size: 30px;
 }
 
 .user-div, .playlist-header-div {
@@ -78,19 +132,27 @@ th {
   margin: 20px 0;
 }
 
-.playlist-div {
+.playlist-div, .playlist-index-div {
   padding: 20px;
   border: rgba(0, 0, 0, 0.625) solid 2px;
   border-radius: 20px;
   background-color: rgb(13, 54, 97);
 }
 
+.playlist-index-div {
+  margin: 30px 0;
+}
+
 .user-name {
   padding-left: 10px;
 }
 
-.content-wrapper {
+.content-wrapper, #pl-index-content-wrapper {
   width: 70vw;
+}
+
+#pl-index-content-wrapper {
+  padding-bottom: 50px;
 }
 
 .new-playlist {

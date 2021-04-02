@@ -5,6 +5,12 @@ Welcome to the project PLAYLIST, where you can make the playlist of your dreams!
 # Screenshots
 
 ![the first screenshot](/public/images/screenshot-1.png)
+![the second screenshot](/public/images/screenshot-2.png)
+![the third screenshot](/public/images/screenshot-3.png)
+![the fourth screenshot](/public/images/screenshot-4.png)
+![the fifth screenshot](/public/images/screenshot-5.png)
+![the sixth screenshot](/public/images/screenshot-6.png)
+![the seventh screenshot](/public/images/screenshot-7.png)
 
 # Technologies Used
 

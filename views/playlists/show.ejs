@@ -47,12 +47,14 @@
         </tr>
         <% for (let i = 0; i < 5; i++) { %>
           <% if (!playlist.songs[i]) break; %>
-          <tr>
-            <td><%= playlist.songs[i].title %> </td>
-            <td><%= playlist.songs[i].artist %> </td>
-            <td><%= playlist.songs[i].album %> </td>
-            <td><%= playlist.songs[i].time %> </td>
-          </tr>
+          <form action="/songs/<%= playlist.songs[i]._id %>?_method=DELETE" method="POST">
+            <tr>
+              <td><%= playlist.songs[i].title %> </td>
+              <td><%= playlist.songs[i].artist %> </td>
+              <td><%= playlist.songs[i].album %> </td>
+              <td><%= playlist.songs[i].time %> <button id="delete-song-button" type="submit">DELETE</button> </td>
+            </tr>
+          </form>
         <% }; %>
         <tr>
           <td><div class="table-line"></div></td>

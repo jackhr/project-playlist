@@ -228,12 +228,16 @@ th {
   color: rgb(158, 211, 255);
 }
 
-#delete-playlist, #update-comment, #delete-comment, #add-songs, #add-button, #new-playlist-form > button {
+#delete-playlist, #update-comment, #delete-comment, #add-songs, #add-button, #new-playlist-form > button, #delete-song-button {
   background-color: transparent;
   border: none;
   color: rgb(255, 158, 158);
   font-size: 30px;
   padding: 0;
+}
+
+#delete-song-button {
+  font-size: 15px;
 }
 
 #add-button {

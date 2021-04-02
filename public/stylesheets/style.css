@@ -73,6 +73,21 @@ th {
   margin: 10px 0;
 }
 
+.user-div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-div > div h1:nth-child(3) {
+  font-size: 50px;
+  margin-top: 10px;
+}
+
+.user-div > div > div {
+  height: 10px;
+}
+
 #playlist-title-div {
   display: flex;
   flex-direction: column;
@@ -147,7 +162,7 @@ th {
   padding-left: 10px;
 }
 
-.content-wrapper, #pl-index-content-wrapper {
+.content-wrapper, #pl-index-content-wrapper, #info-div {
   width: 70vw;
 }
 
@@ -191,3 +206,38 @@ th {
   font-size: 13px;
   color: rgb(158, 211, 255);
 }
+
+#delete-playlist, #update-comment, #delete-comment, #add-songs {
+  background-color: transparent;
+  border: none;
+  color: rgb(255, 158, 158);
+  font-size: 30px;
+  padding: 0;
+}
+
+#add-songs {
+  color: rgb(158, 255, 165);
+}
+
+#delete-comment {
+font-size: 15px;
+}
+
+#update-comment {
+  font-size: 15px;
+  color: rgb(158, 211, 255);
+}
+
+#comment-section {
+  margin: 60px 0;
+}
+
+#comment-div {
+  display: flex;
+  align-items:center;
+}
+
+#comment-div > p {
+  margin-left: 15px;
+}
+

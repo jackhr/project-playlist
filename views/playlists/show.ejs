@@ -1,44 +1,66 @@
 <%- include('../partials/header') %>
 
-  <% if (!playlist.image) { %>
-    <img style="width: 100px;" src="/images/project-playlist.svg">
-  <% } else { %>
-  <img style="width: 200px;" src="<%= playlist.img %>">
-  <% } %> 
-  <% if (!user || !playlist.user._id.equals(user._id)) { %>
-    <a href="/users/<%= playlist.user._id %>">Go to <%= playlist.user.name %>'s page </a>
-  <% } %>
-  <h1><%= playlist.title %> </h1>
-  <% if (playlist.songs.length === 1) { %>
-    <p><%= playlist.songs.length %> song, <%= playlist.duration %></p>
-  <% } else { %>
-    <p><%= playlist.songs.length %> songs, <%= playlist.duration %></p>
-  <% } %> 
-  <table>
-    <thead>
-      <tr>
-        <th>Track</th>
-        <th>Artist</th>
-        <th>Album</th>
-        <th>Duration</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><div class="table-line"></div></td>
-        <td><div class="table-line"></div></td>
-        <td><div class="table-line"></div></td>
-        <td><div id="last-line" class="table-line"></div></td>
-      </tr>
-      <% for (let i = 0; i < 5; i++) { %>
-        <% if (!playlist.songs[i]) break; %>
+<div class="user-div">
+  <img class="user-avatar" src="<%= playlist.user.avatar %>">
+
+</div>
+  <br><br>
+<div class="playlist-div content-wrapper">
+  <div class="playlist-header-div">
+    <% if (!!playlist.img) { %>
+      <img style="width: 200px;" src="<%= playlist.img %>">
+      <% } else { %>
+      <% if (playlist.songs.length) { %>
+        <div class="artwork-div">
+          <% for (let i = 0; i < 4; i++) { %>
+            <% if (!playlist.songs[i]) break; %>
+            <% if (playlist.songs.length < 4) { %>
+              <img style="width: 200px;" src="<%= playlist.songs[i].artistAvatar %> ">
+            <% break; %> 
+            <% } %>
+            <img style="width: 100px;" src="<%= playlist.songs[i].artistAvatar %> ">
+            <% if (i === 1) { %>
+              <br>
+            <% } %>
+          <% } %>
+        </div>
+      <% } else { %>
+        <img style="width: 200px;" src="/images/white-double-quaver.png">
+      <% } %> 
+    <% } %> 
+    <h1 class="playlist-title"><%= playlist.title %></h1>
+  </div>
+    <table>
+      <thead>
         <tr>
-          <td><%= playlist.songs[i].title %> </td>
-          <td><%= playlist.songs[i].artist %> </td>
-          <td><%= playlist.songs[i].album %> </td>
-          <td><%= playlist.songs[i].time %> </td>
+          <th>Track</th>
+          <th>Artist</th>
+          <th>Album</th>
+          <th>Duration</th>
         </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="table-line"></div></td>
+          <td><div class="table-line"></div></td>
+          <td><div class="table-line"></div></td>
+          <td><div id="last-line" class="table-line"></div></td>
+        </tr>
+        <% for (let i = 0; i < 5; i++) { %>
+          <% if (!playlist.songs[i]) break; %>
+          <tr>
+            <td><%= playlist.songs[i].title %> </td>
+            <td><%= playlist.songs[i].artist %> </td>
+            <td><%= playlist.songs[i].album %> </td>
+            <td><%= playlist.songs[i].time %> </td>
+          </tr>
         <% }; %>
+        <tr>
+          <td><div class="table-line"></div></td>
+          <td><div class="table-line"></div></td>
+          <td><div class="table-line"></div></td>
+          <td><div id="last-line" class="table-line"></div></td>
+        </tr>
         <tr>
           <% if (playlist.songs.length === 1) { %>  
             <td><span class="time-span"><%= playlist.songs.length %> song, <%= playlist.duration %></span></td>
@@ -52,15 +74,24 @@
         <tr>
           <td><a class="time-span" href="/users/<%= playlist.user._id %>">More From User</a></td>
         </tr>
-    </tbody>
-  </table>
-  <% if (user && playlist.user._id.equals(user._id)) { %>
-    <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
-      <button type="submit">X</button>
-    </form>
-    <a href="/playlists/<%= playlist._id %>/search"><button>Forget Something?</button></a>
-    <% } %>
-    <h2>Description:</h2>
+        <tr>
+          <% if (user && playlist.user._id.equals(user._id)) { %>
+            <td><a id="add-songs" href="/playlists/<%= playlist._id %>/search">ADD</a></td>
+          <% } %>
+        </tr>
+        <tr>
+          <% if (user && playlist.user._id.equals(user._id)) { %>
+            <td>
+              <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+              <button id="delete-playlist" type="submit">DELETE</button>
+            </td>
+          <% } %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="info-div">
+    <h2>About:</h2>
     <p> <%= playlist.about %> </p>
     <% if (user && playlist.user._id.equals(user._id)) { %>
       <form action="/playlists/<%= playlist._id %>/description?_method=PUT" method="POST">
@@ -68,30 +99,35 @@
         <button type="submit">EDIT</button>
       </form>
     <% } %>
-  <br><br>
-  <% if (user) { %>
-    <h2>Add a comment...</h2>
-    <form action="/playlists/<%= playlist._id %>/comments" method="POST">
-      <input name="content">
-      <button type="submit">ADD COMMENT</button>
-    </form>
+    <br><br>
+    <% if (user) { %>
+      <h2>Add a comment...</h2>
+      <form action="/playlists/<%= playlist._id %>/comments" method="POST">
+        <input name="content">
+        <button type="submit">ADD COMMENT</button>
+      </form>
     <% } %>
-  <% if (playlist.comments.length) { %>
-    <% playlist.comments.forEach(c => { %>
-      <h2><%= c.userName %> </h2>
-      <img src="<%= c.userAvatar %>">
-      <p><%= c.content %></p>
-      <% if (user && c.userId.equals(user._id)) { %>
-        <form action="/comments/<%= c._id %>?_method=PUT" method="POST">
-          <input name="content" placeholder="<%= c.content %>">
-          <button type="submit">UPDATE COMMENT</button>
-        </form>
-        <form action="/comments/<%= c._id %>?_method=DELETE" method="POST">
-          <button type="submit">X</button>
-        </form>
+    <div id="comment-section">
+      <% if (playlist.comments.length) { %>
+        <% playlist.comments.forEach(c => { %>
+          <h2><%= c.userName %> </h2>
+          <div id="comment-div">
+            <img class="user-avatar" src="<%= c.userAvatar %>">
+            <p><%= c.content %></p>
+          </div>
+          <% if (user && c.userId.equals(user._id)) { %>
+            <form action="/comments/<%= c._id %>?_method=PUT" method="POST">
+              <input name="content" placeholder="<%= c.content %>">
+              <button id="update-comment" type="submit">UPDATE COMMENT</button>
+            </form>
+            <form action="/comments/<%= c._id %>?_method=DELETE" method="POST">
+              <button id="delete-comment" type="submit">DELETE</button>
+            </form>
+          <% } %>
+        <% }); %> 
+      <% } else { %>
+        <p>There are no comments yet!</p>
       <% } %>
-    <% }); %> 
-  <% } else { %>
-    <p>There are no comments yet!</p>
-  <% } %> 
+    </div>
+  </div>
 <%- include('../partials/footer') %>

@@ -105,8 +105,9 @@ th {
   margin: 5px 0;
 }
 
-.playlist-title {
-  font-size: 40px;
+.playlist-title > a {
+  font-size: 30px;
+  color: rgb(213, 213, 213);
 }
 
 #playlist-user {

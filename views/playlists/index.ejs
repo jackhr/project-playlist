@@ -7,7 +7,7 @@
   <div id="pl-index-content-wrapper">
     <% playlists.forEach(function(p) { %>
       <div class="playlist-index-div">
-        <div class="artwork-div">
+        <a class="artwork-div" href="/playlists/<%= p._id %>">
           <% if (!!p.img) { %>
             <img style="width: 200px;" src="<%= p.img %>">
           <% } else { %>
@@ -27,9 +27,13 @@
               <img style="width: 200px;" src="/images/white-double-quaver.png">
             <% } %> 
           <% } %>
-        </div>
+        </a>
         <div class="playlist-header">
-          <h2 class="playlist-title"><%= p.title %></h2>
+          <h2 class="playlist-title">
+            <a href="/playlists/<%= p._id %>">
+              <%= p.title %>
+            </a>
+          </h2>
           <a style="color: unset;" href="/users/<%= p.user._id %>">
           <div id="name-and-avatar">
             <img class="user-avatar" src="<%= p.user.avatar %> ">

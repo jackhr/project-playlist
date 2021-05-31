@@ -17,7 +17,7 @@
     <% if (playlists.length) { %>
       <% playlists.forEach(function(p) { %>
         <div class="playlist-div">
-          <div class="playlist-header-div">
+          <a class="playlist-header-div" href="/playlists/<%= p._id %>">
             <% if (!!p.img) { %>
               <img style="width: 200px;" src="<%= p.img %>">
               <% } else { %>
@@ -40,7 +40,7 @@
               <% } %> 
             <% } %> 
             <h1 class="playlist-title"><%= p.title %></h1>
-          </div>
+          </a>
           <table>
             <thead>
               <tr>

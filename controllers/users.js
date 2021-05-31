@@ -36,13 +36,19 @@ function show(req, res) {
 
 function index(req, res) {
   Playlist.find({})
-  .populate('user').exec(function(err, playlists) {
+  .populate('user')
+  .exec(function(err, playlists) {
     if (err) console.log(err);
     const playlistUsers = [];
     playlists.forEach(p => {
       if (!playlistUsers.includes(p.user)) {
         playlistUsers.push(p.user);
       }
+    });
+    playlistUsers.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
     });
     res.render('users/index', { playlistUsers, title: 'Project PLAYLIST' });
   });

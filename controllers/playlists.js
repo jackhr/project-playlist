@@ -115,7 +115,7 @@ function index(req, res) {
       pl.duration = pl.songs.reduce((acc, s) => acc + s.duration, 0);
       pl.duration = timeConverter(pl.duration);
     });
-    res.render('playlists/index', { playlists, title: 'ALL PLAYLISTS' });
+    res.render('playlists/index', { playlists, title: 'All Playlists' });
   });
 }
 

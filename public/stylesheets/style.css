@@ -315,7 +315,6 @@ th {
 }
 
 #playlists-title {
-  font-size: 50px;
   margin: 30px 0;
 }
 
@@ -323,9 +322,12 @@ th {
   text-align: center;
 }
 
-#curator-div > h1 {
+h1 {
   font-family: 'Comfortaa', cursive;
   font-size: 60px;
+}
+
+#curator-div > h1 {
   margin-top: 60px;
 }
 

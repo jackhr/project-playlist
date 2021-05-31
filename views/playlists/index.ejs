@@ -74,11 +74,13 @@
                   <td><div id="last-line" class="table-line"></div></td>
                 </tr>
                 <tr>
-                  <% if (p.songs.length === 1) { %>  
-                    <td><span class="time-span"><%= p.songs.length %> song, <%= p.duration %></span></td>
-                  <% } else { %>
-                    <td><span class="time-span"><%= p.songs.length %> songs, <%= p.duration %></span></td>
-                  <% } %>
+                  <td>
+                    <span class="time-span">
+                      <%= p.songs.length %>
+                      <%= p.songs.length === 1 ? ' song, ' : ' songs, ' %>
+                      <%= p.duration %>
+                    </span>
+                  </td>
                   <td></td>
                   <td></td>
                   <td></td>

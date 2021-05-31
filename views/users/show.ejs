@@ -77,11 +77,13 @@
                   <td><div class="table-line"></div></td>
                   <td><div id="last-line" class="table-line"></div></td>
                 </tr>
-                <% if (p.songs.length === 1) { %>  
-                  <td><span class="time-span"><%= p.songs.length %> song, <%= p.duration %></span></td>
-                <% } else { %>
-                  <td><span class="time-span"><%= p.songs.length %> songs, <%= p.duration %></span></td>
-                <% } %>
+                <td>
+                  <span class="time-span">
+                    <%= p.songs.length %>
+                    <%= p.songs.length === 1 ? ' song, ' : ' songs, ' %>
+                    <%= p.duration %>
+                  </span>
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -93,13 +95,13 @@
           <br><br>
       <% }); %>
     <% } else { %>
-      <p>There's no one here but you...</p>
+      <p id="solo">There's no one here but you...</p>
     <% } %>
   </div>
   <div id="new-playlist-div">
     <% if (user) { %>
       <% if (playlists.length < 1) { %>
-        <a class="new-playlist" href="/playlists/new"><img class="new-playlist-img" src="/images/add-playlist-icon-blue.png">&nbsp;&nbsp;Make a new Playlist</a>
+        <a class="new-playlist" href="/playlists/new"><img class="new-playlist-img" src="/images/add-playlist-icon-white.png">&nbsp;&nbsp;Make a new Playlist</a>
       <% } else if(playlists[0].user._id.equals(user._id)) { %>
         <a class="new-playlist" href="/playlists/new"><img class="new-playlist-img" src="/images/add-playlist-icon-white.png">&nbsp;&nbsp;New Playlist</a>
       <% } %> 

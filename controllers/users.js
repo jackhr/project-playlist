@@ -1,4 +1,3 @@
-const User = require('../models/user');
 const Playlist = require('../models/playlist');
 
 module.exports = {
@@ -36,9 +35,16 @@ function show(req, res) {
 }
 
 function index(req, res) {
-  User.find({}, function(err, users) {
+  Playlist.find({})
+  .populate('user').exec(function(err, playlists) {
     if (err) console.log(err);
-    res.render('users/index', { users, title: 'Project PLAYLIST' });
+    const playlistUsers = [];
+    playlists.forEach(p => {
+      if (!playlistUsers.includes(p.user)) {
+        playlistUsers.push(p.user);
+      }
+    });
+    res.render('users/index', { playlistUsers, title: 'Project PLAYLIST' });
   });
 }
 

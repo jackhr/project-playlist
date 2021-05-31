@@ -104,6 +104,7 @@
     <h2>About:</h2>
     <p> <%= playlist.about %> </p>
     <% if (user && playlist.user._id.equals(user._id)) { %>
+      <form action=""></form>
       <form action="/playlists/<%= playlist._id %>/description?_method=PUT" method="POST">
         <input name="about">
         <button type="submit">EDIT</button>

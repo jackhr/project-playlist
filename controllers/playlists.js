@@ -1,7 +1,16 @@
 const Playlist = require('../models/playlist');
-const token = process.env.SHAZAM_KEY;
 const rootURL = "https://genius.p.rapidapi.com/";
 const fetch = require('node-fetch');
+const uuid = require('uuid');
+const {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+} = require("@aws-sdk/client-s3");
+const token = process.env.SHAZAM_KEY;
+const BASE_URL = process.env.S3_BASE_URL;
+const BUCKET = process.env.S3_BUCKET;
+const REGION = process.env.REGION;
 
 module.exports = {
   index,
@@ -62,8 +71,11 @@ function show(req, res) {
   })
 }
 
-function create(req, res) {
+async function create(req, res) {
+  AWSData = await getNewImageUrl(req.files.img);
   const playlist = new Playlist(req.body);
+  playlist.img = AWSData.url;
+  playlist.AWSKey = AWSData.key;
   playlist.user = req.user._id;
   playlist.save(function(err) {
     if (err) console.log(err);
@@ -78,11 +90,11 @@ function newPlaylist(req, res) {
 function search(req, res) {
   const q = req.query.q;
   const options = {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": token,
-		"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
-	}
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-key": token,
+      "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
+    }
   }
   fetch(`${rootURL}search?q=${q}`, options)
   .then(res => res.json())
@@ -121,7 +133,55 @@ function index(req, res) {
 
 function deleteOne(req, res) {
   Playlist.findByIdAndDelete(req.params.id, function(err, playlist) {
+    deleteImage(playlist.AWSKey);
     if (err) console.log(err);
     res.redirect(`/users/${playlist.user}`);
   })
+}
+
+/*-----Helper Functions-----*/
+
+function generateAWSKey(photo) {
+  const hex = uuid.v4().slice(uuid.v4().length-6);
+  const fileExtension = photo.mimetype.match(/[/](.*)/)[1].replace('', '.');
+  return hex + fileExtension;
+}
+
+async function getNewImageUrl(photo) {
+  const uploadParams = {
+    Bucket: BUCKET,
+    Key: generateAWSKey(photo),
+    Body: photo.data
+  }
+  const s3 = new S3Client({ region: REGION });
+  const run = async () => {
+    try {
+      const data = await s3.send(new PutObjectCommand(uploadParams));
+      console.log(`Successfully uploaded ${uploadParams.Key}:`, data);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+  run();
+  return {
+    url: `${BASE_URL}${BUCKET}/${uploadParams.Key}`,
+    key: uploadParams.Key
+  }
+}
+
+async function deleteImage(key) {
+  const uploadParams = {
+    Bucket: BUCKET,
+    Key: key,
+  }
+  const s3 = new S3Client({ region: REGION });
+  const run = async () => {
+    try {
+      await s3.send(new DeleteObjectCommand(uploadParams));
+      console.log("Successfully deleted", key);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+  run();
 }

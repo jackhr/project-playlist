@@ -27,6 +27,7 @@ const songSchema = new Schema({
 const playlistSchema = new Schema({
   title: String,
   img: String,
+  AWSKey: String,
   about: String,
   songs: [songSchema],
   comments: [commentSchema],

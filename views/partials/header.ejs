@@ -15,10 +15,10 @@
   <nav>
     <a href="/"><img id="icon" src="/images/project-playlist.svg"></a>
     <div id="nav-middle">
-      <a class="nav-middle-links" href="/">Home</a>
       <a class="nav-middle-links" href="/playlists">All Playlists</a>
       <% if (user) { %>
         <a class="nav-middle-links" href="/users/<%= user._id %>">My Playlists</a>
+        <a class="nav-middle-links" href="/playlists/new">New Playlist</a>
       <% } %> 
       <a class="nav-middle-links" href="/users">Curators</a>
     </div>

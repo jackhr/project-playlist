@@ -72,10 +72,12 @@ function show(req, res) {
 }
 
 async function create(req, res) {
-  AWSData = await getNewImageUrl(req.files.img);
   const playlist = new Playlist(req.body);
-  playlist.img = AWSData.url;
-  playlist.AWSKey = AWSData.key;
+  if (req.files) {
+    AWSData = await getNewImageUrl(req.files.img);
+    playlist.img = AWSData.url;
+    playlist.AWSKey = AWSData.key;
+  }
   playlist.user = req.user._id;
   playlist.save(function(err) {
     if (err) console.log(err);

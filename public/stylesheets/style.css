@@ -29,6 +29,10 @@ nav {
   height: 70px
 }
 
+button {
+  cursor: pointer;
+}
+
 #icon {
   width: 40px;
   padding-top: 5px;
@@ -230,7 +234,7 @@ th {
   color: rgb(158, 211, 255);
 }
 
-#delete-playlist, #update-comment, #delete-comment, #add-songs, #add-button, #new-playlist-form > button, #delete-song-button {
+#edit-playlist, #delete-playlist, #update-comment, #delete-comment, #add-songs, #add-button, #new-playlist-form > button, #delete-song-button {
   background-color: transparent;
   border: none;
   color: rgb(255, 158, 158);
@@ -238,8 +242,22 @@ th {
   padding: 0;
 }
 
+.edit-button {
+  display: none;
+}
+
+#edit-playlist {
+  color: rgb(158, 211, 255);
+}
+
 #delete-song-button {
   font-size: 15px;
+}
+
+#delete-song-div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 #add-button {

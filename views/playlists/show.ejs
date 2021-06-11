@@ -54,12 +54,14 @@
               <td><%= s.title %> </td>
               <td><%= s.artist %> </td>
               <td><%= s.album %> </td>
-              <td><%= s.time %>
-              <% if (user && playlist.user._id.equals(user._id)) { %>
-                <button id="delete-song-button" type="submit">DELETE</button> </td>
-              <% } else { %>
+              <td>
+                <div id="delete-song-div">
+                  <%= s.time %>
+                  <% if (user && playlist.user._id.equals(user._id)) { %>
+                    <button class="edit-button" id="delete-song-button" type="submit">X</button>
+                  <% } %>
+                </div>
               </td>
-              <% } %> 
             </tr>
           </form>
         <% }); %>
@@ -78,29 +80,21 @@
                 <%= playlist.duration %>
               </span>
             </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="/playlists/<%= playlist._id %>">Details</a></td>
         </tr>
         <tr>
           <td><a class="time-span" href="/users/<%= playlist.user._id %>">More From User</a></td>
         </tr>
-        <tr>
-          <% if (user && playlist.user._id.equals(user._id)) { %>
-            <td><a id="add-songs" href="/playlists/<%= playlist._id %>/search">ADD</a></td>
-          <% } %>
-        </tr>
-        <tr>
-          <% if (user && playlist.user._id.equals(user._id)) { %>
-            <td>
-              <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
-              <button id="delete-playlist" type="submit">DELETE</button>
-            </td>
-          <% } %>
-        </tr>
       </tbody>
     </table>
+    <% if (user && playlist.user._id.equals(user._id)) { %>
+      <div>
+        <button id="edit-playlist">EDIT</button>
+        <a class="edit-button" id="add-songs" href="/playlists/<%= playlist._id %>/search">ADD SONGS</a>
+        <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+          <button class="edit-button" id="delete-playlist" type="submit">DELETE</button>
+        </form>
+      </div>
+    <% } %>
   </div>
   <div id="info-div">
     <h2>About:</h2>
@@ -143,4 +137,19 @@
       <% } %>
     </div>
   </div>
+
+  <script>
+    const extraTdEl = document.getElementById('extra');
+    const editEl = document.getElementById('edit-playlist');
+    const hiddenEls = document.getElementsByClassName('edit-button');
+    let edit = true;
+    editEl.addEventListener('click', function(evt) {
+      for (let i = 0; i < hiddenEls.length; i++) {
+        hiddenEls[i].style.display = edit ? "inherit" : "none";
+      }
+      editEl.innerHTML = edit ? "DONE" : "EDIT";
+      edit = !edit;
+    });
+  </script>
+
 <%- include('../partials/footer') %>

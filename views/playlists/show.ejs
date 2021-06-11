@@ -3,7 +3,13 @@
 <div class="user-div">
   <a href="/users/<%= playlist.user._id %> "><img class="user-avatar" src="<%= playlist.user.avatar %>"></a>
 </div>
+<% if (editFunc) { %>
+  <div id="msg-div">
+    <h2>You have to choose a photo first!</h2>
+  </div>
+<% } else { %>
   <br><br>
+<% } %>
 <div class="playlist-div content-wrapper">
   <div class="playlist-header-div">
     <% if (!!playlist.img) { %>
@@ -90,6 +96,12 @@
       <div>
         <button id="edit-playlist">EDIT</button>
         <a class="edit-button" id="add-songs" href="/playlists/<%= playlist._id %>/search">ADD SONGS</a>
+        <form class="edit-button" id="add-cover-img-form" action="/playlists/<%= playlist._id %>/image?_method=PUT" method="POST" enctype="multipart/form-data">
+          <button id="add-cover-img-btn" type="submit">
+            <%= playlist.img ? "CHANGE" : "ADD" %> ARTWORK
+          </button>
+          <input id="add-cover-img" type="file" name="img">
+        </form>
         <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
           <button class="edit-button" id="delete-playlist" type="submit">DELETE</button>
         </form>
@@ -137,19 +149,36 @@
       <% } %>
     </div>
   </div>
-
+  <div id="editFunc" style="display: none;"><%= editFunc %></div>
   <script>
+    const msgEl = document.getElementById('msg-div');
+    const editFunc = document.getElementById('editFunc');
     const extraTdEl = document.getElementById('extra');
     const editEl = document.getElementById('edit-playlist');
     const hiddenEls = document.getElementsByClassName('edit-button');
     let edit = true;
+    if (editFunc.innerText.length === 4) {
+      for (let i = 0; i < hiddenEls.length; i++) {
+        if (hiddenEls[i].id === 'add-cover-img-form') {
+          hiddenEls[i].style.display = "flex";
+        } else hiddenEls[i].style.display = "inherit";
+      }
+      editEl.innerHTML = "DONE";
+      edit = !edit;
+    }
     editEl.addEventListener('click', function(evt) {
       for (let i = 0; i < hiddenEls.length; i++) {
-        hiddenEls[i].style.display = edit ? "inherit" : "none";
-      }
-      editEl.innerHTML = edit ? "DONE" : "EDIT";
-      edit = !edit;
-    });
+        hiddenEls[i].style.display = edit ? (
+          hiddenEls[i].id === 'add-cover-img-form' ? "flex" : "inherit"
+          ) : "none";
+        }
+        editEl.innerHTML = edit ? "DONE" : "EDIT";
+        edit = !edit;
+        // This if statement must be last in the function
+        if (editFunc) {
+          msgEl.innerHTML = "<br><br>";
+        }
+      });
   </script>
 
 <%- include('../partials/footer') %>

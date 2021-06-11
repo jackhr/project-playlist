@@ -41,11 +41,20 @@ function timeConverter(duration) {
 }
 
 function editImage(req, res) {
-  Playlist.findById(req.params.id, function(err, playlist) {
-    playlist.img = req.body.img;
-    playlist.save(function(err) {
-      res.redirect(`/playlists/${req.params.id}`);
-    });
+  Playlist.findById(req.params.id).populate('user').exec(async function(err, playlist) {
+    if (err) console.log(err);
+    if (req.files) {
+      if (playlist.img) deleteImage(playlist.AWSKey);
+      AWSData = await getNewImageUrl(req.files.img);
+      playlist.img = AWSData.url;
+      playlist.AWSKey = AWSData.key;
+      playlist.save(function(err) {
+        if (err) console.log(err);
+        res.redirect(`/playlists/${req.params.id}`);
+      });
+    } else {
+      res.render('playlists/show', { playlist, title: `${playlist.title} playlist`, editFunc: true });
+    }
   });
 }
 function editDescription(req, res) {
@@ -67,7 +76,7 @@ function show(req, res) {
   Playlist.findById(req.params.id).populate('user').exec(function(err, playlist) {
     playlist.duration = playlist.songs.reduce((acc, s) => acc + s.duration, 0);
     playlist.duration = timeConverter(playlist.duration);
-    res.render('playlists/show', { playlist, title: `${playlist.title} playlist` })
+    res.render('playlists/show', { playlist, title: `${playlist.title} playlist`, editFunc: false })
   })
 }
 

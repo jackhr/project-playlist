@@ -19,6 +19,8 @@ router.put('/:id/image', isLoggedIn, playlistsCtrl.editImage);
 
 router.put('/:id/description', isLoggedIn, playlistsCtrl.editDescription);
 
+router.put('/:id/title', isLoggedIn, playlistsCtrl.editTitle);
+
 router.delete('/:id', isLoggedIn, playlistsCtrl.delete);
 
 router.delete('/:id/image', isLoggedIn, playlistsCtrl.deleteCoverImage);

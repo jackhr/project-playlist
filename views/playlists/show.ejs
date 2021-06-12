@@ -34,7 +34,15 @@
         <img style="width: 200px;" src="/images/white-double-quaver.png">
       <% } %> 
     <% } %> 
-    <h1 class="playlist-title"><%= playlist.title %></h1>
+    <div>
+      <h1 class="playlist-title"><%= playlist.title %></h1>
+      <% if (user && playlist.user._id.equals(user._id)) { %>
+        <form class="edit-button" action="/playlists/<%= playlist._id %>/title?_method=PUT" method="POST">
+          <input placeholder="<%= playlist.title %>" type="text" name="title">
+          <button type="submit">Rename</button>
+        </form>
+      <% } %>
+    </div>
   </div>
     <table>
       <thead>
@@ -99,6 +107,7 @@
         <button id="edit-playlist">EDIT</button>
         <br class="edit-button"><br class="edit-button">
         <a class="edit-button" id="add-songs" href="/playlists/<%= playlist._id %>/search">ADD SONGS</a>
+        <br class="edit-button">
         <form class="edit-button" id="add-cover-img-form" action="/playlists/<%= playlist._id %>/image?_method=PUT" method="POST" enctype="multipart/form-data">
           <button id="add-cover-img-btn" type="submit">
             <%= playlist.img ? "CHANGE" : "ADD" %> ARTWORK
@@ -166,6 +175,7 @@
     const editFunc = document.getElementById('editFunc');
     const extraTdEl = document.getElementById('extra');
     const editEl = document.getElementById('edit-playlist');
+    const playlistTitleEl = document.getElementsByClassName('playlist-title')[0];
     const hiddenEls = document.getElementsByClassName('edit-button');
     let edit = true;
     if (editFunc.innerText.length === 4) {
@@ -184,6 +194,7 @@
       });
     }
     editEl.addEventListener('click', function(evt) {
+      playlistTitleEl.style.display = edit ? "none" : "inherit";
       for (let i = 0; i < hiddenEls.length; i++) {
         hiddenEls[i].style.display = edit ? (
           hiddenEls[i].id === 'add-cover-img-form' ? "flex" : "inherit"

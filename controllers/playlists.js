@@ -22,14 +22,15 @@ module.exports = {
   delete: deleteOne,
   editDescription,
   editImage,
-  deleteCoverImage
+  deleteCoverImage,
+  editTitle
 };
 
 function timeConverter(duration) {
   let mins = Math.floor(duration / 60).toString();
   let secs = (duration % 60).toString();
   if (mins >= 60) {
-    let hrs = Math.floor(mins / 60).toString()
+    let hrs = Math.floor(mins / 60).toString();
     let minutes = (mins % 60).toString();
     if (minutes < 1 && secs < 30) return `${hrs} hr`;
     if (secs > 30) {
@@ -67,13 +68,23 @@ function editImage(req, res) {
         if (err) console.log(err);
         setTimeout(function() {
           res.redirect(`/playlists/${req.params.id}`);
-        }, 1000)
+        }, 1000);
       });
     } else {
       res.render('playlists/show', { playlist, title: `${playlist.title} playlist`, editFunc: true });
     }
   });
 }
+
+function editTitle(req, res) {
+  Playlist.findById(req.params.id, function(err, playlist) {
+    playlist.title = req.body.title;
+    playlist.save(function(err) {
+      res.redirect(`/playlists/${req.params.id}`);
+    });
+  });
+}
+
 function editDescription(req, res) {
   Playlist.findById(req.params.id, function(err, playlist) {
     playlist.about = req.body.about;
@@ -93,8 +104,12 @@ function show(req, res) {
   Playlist.findById(req.params.id).populate('user').exec(function(err, playlist) {
     playlist.duration = playlist.songs.reduce((acc, s) => acc + s.duration, 0);
     playlist.duration = timeConverter(playlist.duration);
-    res.render('playlists/show', { playlist, title: `${playlist.title} playlist`, editFunc: false })
-  })
+    res.render('playlists/show', {
+      playlist,
+      title: `${playlist.title} playlist`,
+      editFunc: false
+    });
+  });
 }
 
 async function create(req, res) {
@@ -123,7 +138,7 @@ function search(req, res) {
       "x-rapidapi-key": token,
       "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
     }
-  }
+  };
   fetch(`${rootURL}search?q=${q}`, options)
   .then(res => res.json())
   .then(searchData => {
@@ -136,13 +151,22 @@ function search(req, res) {
     });
     Playlist.findById(req.params.id, function(err, playlist) {
       if (searchData.total === 0) {
-        res.render(`playlists/add-song`, { failed: true, playlist, title: playlist.title })
+        res.render(`playlists/add-song`, {
+          failed: true,
+          playlist,
+          title: playlist.title
+        });
       }
-      res.render('playlists/results', { q, playlist, tracks, title: `Song Search for ${playlist.title} playlist` });
+      res.render('playlists/results', {
+        q,
+        playlist,
+        tracks,
+        title: `Song Search for ${playlist.title} playlist`
+      });
     });
   })
   .catch(err => {
-    console.log(err)
+    console.log(err);
   });
 }
 
@@ -180,7 +204,7 @@ async function getNewImageUrl(photo) {
     Bucket: BUCKET,
     Key: generateAWSKey(photo),
     Body: photo.data
-  }
+  };
   const s3 = new S3Client({ region: REGION });
   const run = async () => {
     try {
@@ -194,14 +218,14 @@ async function getNewImageUrl(photo) {
   return {
     url: `${BASE_URL}${BUCKET}/${uploadParams.Key}`,
     key: uploadParams.Key
-  }
+  };
 }
 
 async function deleteImage(key) {
   const uploadParams = {
     Bucket: BUCKET,
     Key: key,
-  }
+  };
   const s3 = new S3Client({ region: REGION });
   const run = async () => {
     try {

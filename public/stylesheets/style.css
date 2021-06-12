@@ -234,7 +234,7 @@ th {
   color: rgb(158, 211, 255);
 }
 
-#add-cover-img-btn, #edit-playlist, #delete-playlist, #update-comment, #delete-comment, #add-songs, #add-button, #new-playlist-form > button, #delete-song-button {
+#delete-cover-img, #add-cover-img-btn, #edit-playlist, #delete-playlist, #update-comment, #delete-comment, #add-songs, #add-button, #new-playlist-form > button, #delete-song-button {
   background-color: transparent;
   border: none;
   color: rgb(255, 158, 158);
@@ -242,7 +242,7 @@ th {
   padding: 0;
 }
 
-.edit-button {
+.edit-button, #img-load-err-msg {
   display: none;
 }
 

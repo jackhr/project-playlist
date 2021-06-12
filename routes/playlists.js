@@ -21,5 +21,6 @@ router.put('/:id/description', isLoggedIn, playlistsCtrl.editDescription);
 
 router.delete('/:id', isLoggedIn, playlistsCtrl.delete);
 
+router.delete('/:id/image', isLoggedIn, playlistsCtrl.deleteCoverImage);
 
 module.exports = router;

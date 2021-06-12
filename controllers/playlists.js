@@ -22,6 +22,7 @@ module.exports = {
   delete: deleteOne,
   editDescription,
   editImage,
+  deleteCoverImage
 };
 
 function timeConverter(duration) {
@@ -40,6 +41,20 @@ function timeConverter(duration) {
   return `${mins} min`;
 }
 
+function deleteCoverImage(req, res) {
+  Playlist.findById(req.params.id, function(err, playlist) {
+    if (err) console.log(err);
+    console.log(playlist);
+    deleteImage(playlist.AWSKey);
+    playlist.img = "";
+    playlist.AWSKey = "";
+    playlist.save(function(err) {
+      if (err) console.log(err);
+      res.redirect(`/playlists/${req.params.id}`);
+    });
+  });
+}
+
 function editImage(req, res) {
   Playlist.findById(req.params.id).populate('user').exec(async function(err, playlist) {
     if (err) console.log(err);
@@ -50,7 +65,9 @@ function editImage(req, res) {
       playlist.AWSKey = AWSData.key;
       playlist.save(function(err) {
         if (err) console.log(err);
-        res.redirect(`/playlists/${req.params.id}`);
+        setTimeout(function() {
+          res.redirect(`/playlists/${req.params.id}`);
+        }, 1000)
       });
     } else {
       res.render('playlists/show', { playlist, title: `${playlist.title} playlist`, editFunc: true });

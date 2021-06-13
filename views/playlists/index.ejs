@@ -5,9 +5,9 @@
     <h2>I'm sure they'll be along shortly...</h2>
   <% } %>
   <div id="pl-index-content-wrapper">
-    <% playlists.forEach(function(p) { %>
+    <% playlists.forEach(function(p, idx) { %>
       <div class="playlist-index-div">
-        <a class="artwork-div" href="/playlists/<%= p._id %>">
+        <a class="artwork-div" href="/playlists/<%= p._id %>" tabindex="<%= idx + 1 %>">
           <% if (!!p.img) { %>
             <img style="width: 200px;" src="<%= p.img %>">
           <% } else { %>

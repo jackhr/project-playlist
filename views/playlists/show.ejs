@@ -156,7 +156,9 @@
           <div id="comment-div">
             <img class="user-avatar" src="<%= c.userAvatar %>">
             <p><%= c.content %></p>
-            <button id="edit-comment-btn">EDIT</button>
+            <% if (user && c.userId.equals(user._id)) { %>
+              <button id="edit-comment-btn">EDIT</button>
+            <% } %>
           </div>
           <% if (user && c.userId.equals(user._id)) { %>
             <div id="edit-comment">
@@ -205,25 +207,29 @@
         errMsg.style.display = "block";
       });
     }
-    editEl.addEventListener('click', () => {
-      playlistTitleEl.style.display = editPlaylist ? "none" : "inherit";
-      for (let i = 0; i < hiddenEls.length; i++) {
-        hiddenEls[i].style.display = editPlaylist ? (
-          hiddenEls[i].id === 'add-cover-img-form' ? "flex" : "inherit"
-          ) : "none";
+    if (editEl) {
+      editEl.addEventListener('click', () => {
+        playlistTitleEl.style.display = editPlaylist ? "none" : "inherit";
+        for (let i = 0; i < hiddenEls.length; i++) {
+          hiddenEls[i].style.display = editPlaylist ? (
+            hiddenEls[i].id === 'add-cover-img-form' ? "flex" : "inherit"
+            ) : "none";
+          }
+        editEl.innerHTML = editPlaylist ? "DONE" : "EDIT";
+        editPlaylist = !editPlaylist;
+        // This if statement must be last in the function
+        if (editFunc) {
+          msgEl.innerHTML = "<br><br>";
         }
-      editEl.innerHTML = editPlaylist ? "DONE" : "EDIT";
-      editPlaylist = !editPlaylist;
-      // This if statement must be last in the function
-      if (editFunc) {
-        msgEl.innerHTML = "<br><br>";
-      }
-    });
-    editCommentBtn.addEventListener('click', () => {
-      commentBtns.style.display = editComment ? "inherit" : "none";
-      editCommentBtn.innerHTML = editComment ? "DONE" : "EDIT";
-      editComment = !editComment;
-    });
+      });
+    }
+    if (editCommentBtn) {
+      editCommentBtn.addEventListener('click', () => {
+        commentBtns.style.display = editComment ? "inherit" : "none";
+        editCommentBtn.innerHTML = editComment ? "DONE" : "EDIT";
+        editComment = !editComment;
+      });
+    }
   </script>
 
 <%- include('../partials/footer') %>

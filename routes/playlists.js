@@ -2,12 +2,13 @@ var express = require('express');
 var router = express.Router();
 const playlistsCtrl = require('../controllers/playlists');
 const isLoggedIn = require('../config/auth');
+const setPreviousUrl = require('../config/middleware');
 
 router.get('/new', isLoggedIn, playlistsCtrl.new);
 
-router.get('/:id', playlistsCtrl.show);
+router.get('/:id', setPreviousUrl, playlistsCtrl.show);
 
-router.get('/', playlistsCtrl.index);
+router.get('/', setPreviousUrl, playlistsCtrl.index);
 
 router.get('/:id/search', isLoggedIn, playlistsCtrl.newSong);
 

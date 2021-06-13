@@ -3,13 +3,13 @@ const Playlist = require('../models/playlist');
 module.exports = {
   index,
   show,
-}
+};
 
 function timeConverter(duration) {
   let mins = Math.floor(duration / 60).toString();
   let secs = (duration % 60).toString();
   if (mins >= 60) {
-    let hrs = Math.floor(mins / 60).toString()
+    let hrs = Math.floor(mins / 60).toString();
     let minutes = (mins % 60).toString();
     if (minutes < 1 && secs < 30) return `${hrs} hr`;
     if (secs > 30) {
@@ -30,8 +30,8 @@ function show(req, res) {
       pl.duration = pl.songs.reduce((acc, s) => acc + s.duration, 0);
       pl.duration = timeConverter(pl.duration);
     });
-    res.render('users/show', { playlists, title: 'MY PLAYLISTS' })
-  })
+    res.render('users/show', { playlists, title: 'MY PLAYLISTS' });
+  });
 }
 
 function index(req, res) {

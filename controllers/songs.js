@@ -3,7 +3,7 @@ const Playlist = require('../models/playlist');
 module.exports = {
   create,
   delete: deleteOne,
-}
+};
 
 function deleteOne(req, res) {
   Playlist.findOne(
@@ -13,11 +13,11 @@ function deleteOne(req, res) {
         res.redirect(`/playlists/${playlist._id}`);
       });
     }
-  )
+  );
 }
 
 function create(req, res) {
-  const lastQuery = JSON.parse(req.body.allTracks)
+  const lastQuery = JSON.parse(req.body.allTracks);
   delete req.body.allTracks;
   Playlist.findById(req.params.id, function(err, playlist) {
     playlist.songs.push(req.body);

@@ -1,30 +1,17 @@
 <%- include('../partials/header') %>
 
-<div class="title-div">
-  <h1> <%= title %> </h1>
-  <form id="new-playlist-form" action="/playlists" method="POST" encType="multipart/form-data">
-    <label>Title:</label>
-    <input type="text" name="title" placeholder="My Dope Playlist">
-    <label>Cover Photo:</label>
-    <input type="file" name="img">
-    <% console.log('hello') %> 
-    <!-- <label>Image:</label>
-    <input type="text" name="img" placeholder="Enter a valid image url"> -->
-    <label id="event">Description:</label>
-    <input type="text" name="about" placeholder="Give your playlist a catchy description!">
-    <button type="submit">FORGE</button>
-  </form>
-</div>
-
-<script>
-  const fileField = document.querySelector('input[type="file"]');
-  const event = document.getElementById('event');
-  console.log(document.__proto__);
-  event.addEventListener('click', test);
-  function test(evt) {
-    console.log(fileField.files[0]);
-  }
-</script>
+  <div class="title-div">
+    <h1><%= title %></h1>
+    <form id="new-playlist-form" action="/playlists" method="POST" encType="multipart/form-data">
+      <label>Title:</label>
+      <input type="text" name="title" placeholder="My Dope Playlist">
+      <label>Cover Photo:</label>
+      <input type="file" name="img">
+      <label id="event">Description:</label>
+      <input type="text" name="about" placeholder="Give your playlist a catchy description!">
+      <button type="submit">FORGE</button>
+    </form>
+  </div>
 
 <%- include('../partials/footer') %>
 

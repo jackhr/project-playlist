@@ -1,20 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
-const isLoggedIn = require('../config/auth');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index')
+  res.render('index');
 });
 
 // Google OAuth login route
-router.get('/auth/google', function(req, res, next) {
-  passport.authenticate(
-    'google',
-    { scope: ['profile', 'email'] }
-  )(req, res, next);
-});
+router.get('/auth/google', passport.authenticate(
+  'google',
+  { scope: ['profile', 'email'] }
+));
 // Google OAuth callback route
 router.get('/oauth2callback', function(req, res, next) {
   passport.authenticate('google', function(err, user) {

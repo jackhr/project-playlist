@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-  <h1 id="playlists-title"><%= title %> </h1>
+  <h1 id="playlists-title"><%= title %></h1>
   <% if (!playlists.length) { %>
     <h2>I'm sure they'll be along shortly...</h2>
   <% } %>
@@ -15,17 +15,17 @@
               <% for (let i = 0; i < 4; i++) { %>
                 <% if (!p.songs[i]) break; %>
                 <% if (p.songs.length < 4) { %>
-                  <img style="width: 200px;" src="<%= p.songs[i].artistAvatar %> ">
-                <% break; %> 
+                  <img style="width: 200px;" src="<%= p.songs[i].artistAvatar %>">
+                <% break; %>
                 <% } %>
-                <img style="width: 100px;" src="<%= p.songs[i].artistAvatar %> ">
+                <img style="width: 100px;" src="<%= p.songs[i].artistAvatar %>">
                 <% if (i === 1) { %>
                   <br>
                 <% } %>
               <% } %>
             <% } else { %>
               <img style="width: 200px;" src="/images/white-double-quaver.png">
-            <% } %> 
+            <% } %>
           <% } %>
         </a>
         <div class="playlist-header">
@@ -36,7 +36,7 @@
           </h2>
           <a class="unset" href="/users/<%= p.user._id %>">
           <div id="name-and-avatar">
-            <img class="user-avatar" src="<%= p.user.avatar %> ">
+            <img class="user-avatar" src="<%= p.user.avatar %>">
             <h2 id="playlist-user"><%= p.user.name %></h2>
           </div>
           </a>
@@ -64,10 +64,10 @@
                 <% if (!p.songs[i]) break; %>
                 <tr>
                   <td><%= i + 1 %></td>
-                  <td><%= p.songs[i].title %> </td>
-                  <td><%= p.songs[i].artist %> </td>
-                  <td><%= p.songs[i].album %> </td>
-                  <td><%= p.songs[i].time %> </td>
+                  <td><%= p.songs[i].title %></td>
+                  <td><%= p.songs[i].artist %></td>
+                  <td><%= p.songs[i].album %></td>
+                  <td><%= p.songs[i].time %></td>
                 </tr>
               <% }; %>
               <tr>

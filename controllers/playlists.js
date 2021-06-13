@@ -172,7 +172,7 @@ function search(req, res) {
         playlist,
         failed: false,
         lastQuery: false,
-        title: `Song Search for ${playlist.title} playlist`
+        title: playlist.title
       });
     });
   })

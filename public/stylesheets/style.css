@@ -238,7 +238,7 @@ th {
   color: unset;
 }
 
-#delete-cover-img, #add-cover-img-btn, #edit-playlist, #delete-playlist, #update-comment, #delete-comment, #add-songs, .add-button, #new-playlist-form > button, #delete-song-button {
+#edit-comment-btn, #delete-cover-img, #add-cover-img-btn, #edit-playlist, #delete-playlist, #update-comment, #delete-comment, #add-songs, .add-button, #new-playlist-form > button, #delete-song-button {
   background-color: transparent;
   border: none;
   color: rgb(255, 158, 158);
@@ -246,7 +246,7 @@ th {
   padding: 0;
 }
 
-.edit-button, #img-load-err-msg {
+#edit-comment, .edit-button, #img-load-err-msg {
   display: none;
 }
 
@@ -289,7 +289,7 @@ th {
 font-size: 15px;
 }
 
-#update-comment {
+#edit-comment-btn, #update-comment {
   font-size: 15px;
   color: rgb(158, 211, 255);
 }
@@ -301,6 +301,8 @@ font-size: 15px;
 #comment-div {
   display: flex;
   align-items:center;
+  justify-content: space-between;
+  width: 400px;
 }
 
 #comment-div > p {

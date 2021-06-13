@@ -39,7 +39,7 @@
                 <img style="width: 200px;" src="/images/white-double-quaver.png">
               <% } %> 
             <% } %> 
-            <h1 class="playlist-title"><%= p.title %></h1>
+            <h1 class="playlist-title"><%= p.title || "Untitled" %></h1>
           </a>
           <table>
             <thead>
@@ -77,6 +77,10 @@
                   <td><div class="table-line"></div></td>
                   <td><div id="last-line" class="table-line"></div></td>
                 </tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>
                   <span class="time-span">
                     <%= p.songs.length %>
@@ -84,10 +88,6 @@
                     <%= p.duration %>
                   </span>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href="/playlists/<%= p._id %>">Details</a></td>
                 </tr>
               </tbody>
             </table>

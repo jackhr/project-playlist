@@ -17,10 +17,19 @@ function deleteOne(req, res) {
 }
 
 function create(req, res) {
+  const lastQuery = JSON.parse(req.body.allTracks)
+  delete req.body.allTracks;
   Playlist.findById(req.params.id, function(err, playlist) {
     playlist.songs.push(req.body);
     playlist.save(function(err) {
-      res.redirect(`/playlists/${playlist._id}`);
+      res.render(`playlists/add-song`, {
+        playlist,
+        lastQuery,
+        addedSongTitle: req.body.title,
+        failed: false,
+        tracks: false,
+        title: playlist.title
+      });
     });
   });
 }

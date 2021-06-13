@@ -234,7 +234,11 @@ th {
   color: rgb(158, 211, 255);
 }
 
-#delete-cover-img, #add-cover-img-btn, #edit-playlist, #delete-playlist, #update-comment, #delete-comment, #add-songs, #add-button, #new-playlist-form > button, #delete-song-button {
+.unset {
+  color: unset;
+}
+
+#delete-cover-img, #add-cover-img-btn, #edit-playlist, #delete-playlist, #update-comment, #delete-comment, #add-songs, .add-button, #new-playlist-form > button, #delete-song-button {
   background-color: transparent;
   border: none;
   color: rgb(255, 158, 158);
@@ -268,11 +272,11 @@ th {
   justify-content: space-between;
 }
 
-#add-button {
+.add-button {
   font-size: 20px;
   color: rgb(158, 211, 255);
 }
-#add-button:hover {
+.add-button:hover {
   transition: color 0.4s ease;
   color: rgb(158, 255, 165);
 }
@@ -303,7 +307,7 @@ font-size: 15px;
   margin-left: 15px;
 }
 
-#search-q {
+.query-message {
   font-size: 30px;
 }
 

@@ -35,7 +35,7 @@
       <% } %> 
     <% } %> 
     <div>
-      <h1 class="playlist-title"><%= playlist.title %></h1>
+      <h1 class="playlist-title"><%= playlist.title || "Untitled" %></h1>
       <% if (user && playlist.user._id.equals(user._id)) { %>
         <form class="edit-button" action="/playlists/<%= playlist._id %>/title?_method=PUT" method="POST">
           <input placeholder="<%= playlist.title %>" type="text" name="title">
@@ -88,6 +88,14 @@
           <td><div id="last-line" class="table-line"></div></td>
         </tr>
         <tr>
+          <td>
+            <% if (!user || !playlist.user._id.equals(user._id)) { %>
+              <a class="time-span" href="/users/<%= playlist.user._id %>">More From User</a>
+            <% } %>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
             <td>
               <span class="time-span">
                 <%= playlist.songs.length %>
@@ -95,9 +103,6 @@
                 <%= playlist.duration %>
               </span>
             </td>
-        </tr>
-        <tr>
-          <td><a class="time-span" href="/users/<%= playlist.user._id %>">More From User</a></td>
         </tr>
       </tbody>
     </table>

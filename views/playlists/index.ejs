@@ -31,10 +31,10 @@
         <div class="playlist-header">
           <h2 class="playlist-title">
             <a href="/playlists/<%= p._id %>">
-              <%= p.title %>
+              <%= p.title || "Untitled" %>
             </a>
           </h2>
-          <a style="color: unset;" href="/users/<%= p.user._id %>">
+          <a class="unset" href="/users/<%= p.user._id %>">
           <div id="name-and-avatar">
             <img class="user-avatar" src="<%= p.user.avatar %> ">
             <h2 id="playlist-user"><%= p.user.name %></h2>
@@ -69,30 +69,27 @@
                   <td><%= p.songs[i].album %> </td>
                   <td><%= p.songs[i].time %> </td>
                 </tr>
-                <% }; %>
-                <tr>
-                  <td><div class="table-line"></div></td>
-                  <td><div class="table-line"></div></td>
-                  <td><div class="table-line"></div></td>
-                  <td><div class="table-line"></div></td>
-                  <td><div id="last-line" class="table-line"></div></td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="time-span">
-                      <%= p.songs.length %>
-                      <%= p.songs.length === 1 ? ' song, ' : ' songs, ' %>
-                      <%= p.duration %>
-                    </span>
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><a href="/playlists/<%= p._id %>">Details</a></td>
-                </tr>
-                <tr>
-                  <td><a class="time-span" href="/users/<%= p.user._id %>">More From User</a></td>
-                </tr>
+              <% }; %>
+              <tr>
+                <td><div class="table-line"></div></td>
+                <td><div class="table-line"></div></td>
+                <td><div class="table-line"></div></td>
+                <td><div class="table-line"></div></td>
+                <td><div id="last-line" class="table-line"></div></td>
+              </tr>
+              <tr>
+                <td><a class="time-span" href="/users/<%= p.user._id %>">More From User</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <span class="time-span">
+                    <%= p.songs.length %>
+                    <%= p.songs.length === 1 ? ' song, ' : ' songs, ' %>
+                    <%= p.duration %>
+                  </span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

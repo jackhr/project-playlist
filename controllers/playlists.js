@@ -96,7 +96,13 @@ function editDescription(req, res) {
 
 function newSong(req, res) {
   Playlist.findById(req.params.id, function(err, playlist) {
-    res.render('playlists/add-song', { playlist, title: playlist.title, failed: false });
+    res.render('playlists/add-song', {
+      playlist,
+      title: playlist.title,
+      failed: false,
+      tracks: false,
+      lastQuery: false
+    });
   });
 }
 
@@ -152,15 +158,20 @@ function search(req, res) {
     Playlist.findById(req.params.id, function(err, playlist) {
       if (searchData.total === 0) {
         res.render(`playlists/add-song`, {
-          failed: true,
+          q,
           playlist,
+          failed: true,
+          tracks: false,
+          lastQuery: false,
           title: playlist.title
         });
       }
-      res.render('playlists/results', {
+      res.render('playlists/add-song', {
         q,
-        playlist,
         tracks,
+        playlist,
+        failed: false,
+        lastQuery: false,
         title: `Song Search for ${playlist.title} playlist`
       });
     });
@@ -185,8 +196,8 @@ function index(req, res) {
 
 function deleteOne(req, res) {
   Playlist.findByIdAndDelete(req.params.id, function(err, playlist) {
-    deleteImage(playlist.AWSKey);
     if (err) console.log(err);
+    if(playlist.AWSKey) deleteImage(playlist.AWSKey);
     res.redirect(`/users/${playlist.user}`);
   })
 }
